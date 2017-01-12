@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+    http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jun-source"></property>
+	</bean>
+	<bean id="dataSource_slave" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jun-source-slave"></property>
+	</bean>
+	<bean id="multipleDataSource" class="com.xiaojun.datasource.MultipleDataSource">
+		<property name="defaultTargetDataSource" ref="dataSource"></property>
+		<property name="targetDataSources">
+			<map>
+				<entry key="dataSource" value-ref="dataSource"></entry>
+				<entry key="dataSource_slave" value-ref="dataSource_slave"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:spring/mybatis.xml" />
+		<property name="mapperLocations" value="classpath:com/xiaojun/dao/*.xml"></property>
+		<property name="dataSource" ref="multipleDataSource" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.xiaojun.dao" />
+	</bean>
+</beans> 
