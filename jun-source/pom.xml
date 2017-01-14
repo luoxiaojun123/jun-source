@@ -17,6 +17,9 @@
 		<aspectjrt-version>1.7.3</aspectjrt-version>
 		<shiro-version>1.3.2</shiro-version>
 		<shiro-ehcache-version>1.3.2</shiro-ehcache-version>
+		<kaptcha-version>0.0.9</kaptcha-version>
+		<jstl-version>1.2</jstl-version>
+		<taglibs-version>1.1.2</taglibs-version>
 	</properties>
 	<profiles>
 		<profile>
