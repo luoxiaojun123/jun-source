@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/mvc 
      	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
+		<property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml"></property>
 	</bean>
 	<bean id="userRealm" class="com.xiaojun.shiro.UserRealm">
 		<constructor-arg ref="cacheManager" />
@@ -30,7 +30,7 @@
 		<property name="unauthorizedUrl" value="/"></property>
 		<property name="filterChainDefinitions">
 			<value>
-
+				/captcha.jpg=anon
 			</value>
 		</property>
 	</bean>
