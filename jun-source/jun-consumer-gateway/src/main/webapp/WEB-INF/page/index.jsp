@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+  <%
+	String path = request.getContextPath();
+	String CONTEXT = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	request.setAttribute("CONTEXT",CONTEXT);
+  %> 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>后台管理系统</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="statics/css/bootstrap.min.css">
-  <link rel="stylesheet" href="statics/css/font-awesome.min.css">
-  <link rel="stylesheet" href="statics/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${CONTEXT}statics/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${CONTEXT}statics/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${CONTEXT}statics/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="statics/css/all-skins.min.css">
-  <link rel="stylesheet" href="statics/css/main.css">
+  <link rel="stylesheet" href="${CONTEXT}statics/css/all-skins.min.css">
+  <link rel="stylesheet" href="${CONTEXT}statics/css/main.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -29,7 +35,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>人人权限系统</b></span>
+      <span class="logo-lg"><b>后台管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -40,7 +46,6 @@
 	  <div style="float:left;color:#fff;padding:15px 10px;">欢迎 {{user.username}}</div>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li><a href="http://www.renren.io" target="_blank"><i class="fa fa-home"></i> &nbsp;编程教程</a></li>
 		  <li><a href="javascript:;" @click="updatePassword"><i class="fa fa-lock"></i> &nbsp;修改密码</a></li>
           <li><a href="logout"><i class="fa fa-sign-out"></i> &nbsp;退出系统</a></li>
 		</ul>
@@ -83,14 +88,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      Version 1.4.0
-    </div>
-    Copyright &copy; 2016 <a href="http://www.renren.io" target="_blank">renren.io</a> All Rights Reserved
-  </footer>
-
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -124,14 +121,14 @@
 
 
 
-<script src="statics/libs/jquery.min.js"></script>
-<script src="statics/libs/vue.min.js"></script>
-<script src="statics/libs/router.js"></script>
-<script src="statics/libs/bootstrap.min.js"></script>
-<script src="statics/libs/jquery.slimscroll.min.js"></script>
-<script src="statics/libs/fastclick.min.js"></script>
-<script src="statics/libs/app.js"></script>
-<script src="statics/plugins/layer/layer.js"></script>
-<script src="js/index.js"></script>
+<script src="${CONTEXT}statics/libs/jquery.min.js"></script>
+<script src="${CONTEXT}statics/libs/vue.min.js"></script>
+<script src="${CONTEXT}statics/libs/router.js"></script>
+<script src="${CONTEXT}statics/libs/bootstrap.min.js"></script>
+<script src="${CONTEXT}statics/libs/jquery.slimscroll.min.js"></script>
+<script src="${CONTEXT}statics/libs/fastclick.min.js"></script>
+<script src="${CONTEXT}statics/libs/app.js"></script>
+<script src="${CONTEXT}statics/plugins/layer/layer.js"></script>
+<script src="${CONTEXT}js/index.js"></script>
 </body>
 </html>

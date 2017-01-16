@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd        
@@ -13,20 +13,24 @@
      	http://www.springframework.org/schema/aop 
      	http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/mvc 
-     	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+     	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+     	http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml"></property>
 	</bean>
+	<dubbo:reference id="sysUserService" interface="com.xiaojun.service.SysUserService" />
 	<bean id="userRealm" class="com.xiaojun.shiro.UserRealm">
-		<constructor-arg ref="cacheManager" />
+		<constructor-arg name="cacheManager" ref="cacheManager" />
+		<constructor-arg name="sysUserService" ref="sysUserService" />
 	</bean>
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm"></property>
 	</bean>
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"></property>
-		<property name="loginUrl" value="/login.html"></property>
-		<property name="successUrl" value="/index.html"></property>
+		<property name="loginUrl" value="/login.jsp"></property>
+		<property name="successUrl" value="/index.jsp"></property>
 		<property name="unauthorizedUrl" value="/"></property>
 		<property name="filterChainDefinitions">
 			<value>

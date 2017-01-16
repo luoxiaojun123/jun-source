@@ -7,14 +7,32 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.xiaojun.shiro.ShiroUtils;
+import com.xiaojun.util.GSONUtils;
+import com.xiaojun.util.PasswordHelper;
+import com.xiaojun.util.Result;
 
+/**
+ * ç™»å½•ç›¸å…³
+ * 
+ * @author xiaojun
+ * @email lxjluoxiaojun@163.com
+ * @date 2017å¹´1æœˆ16æ—¥
+ */
 @Controller
 @RequestMapping("")
 public class LoginController {
@@ -27,22 +45,56 @@ public class LoginController {
 		return "login";
 	}
 
+	/**
+	 * è·å–éªŒè¯ç 
+	 * 
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("captcha.jpg")
 	public void captcha(HttpServletResponse response) throws IOException {
 		response.setHeader("Cache-Control", "no-store, no-cache");
 		response.setContentType("image/jpeg");
-		// Éú³ÉÎÄ×ÖÑéÖ¤Âë
+		// ç”ŸæˆéªŒè¯ç 
 		String text = producer.createText();
-		// Éú³ÉÍ¼Æ¬ÑéÖ¤Âë
+		// ç”Ÿæˆå›¾ç‰‡éªŒè¯ç 
 		BufferedImage image = producer.createImage(text);
-		// ±£´æµ½shiro SessionÖĞ
+		// å°†éªŒè¯ç ä¿å­˜åˆ°shiro sessionä¸­
 		ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
 		ServletOutputStream out = response.getOutputStream();
 		ImageIO.write(image, "jpg", out);
 	}
-	
+
 	@RequestMapping("login")
-	public void login(HttpServletResponse response) throws IOException {
-		
+	@ResponseBody
+	public String login(String username, String password, String captcha) throws IOException {
+		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
+		Result<String> result = new Result<>();
+		if (!captcha.equalsIgnoreCase(kaptcha)) {
+			result.error("éªŒè¯ç é”™è¯¯");
+			return GSONUtils.toJson(result, true);
+		}
+		try {
+			Subject subject = ShiroUtils.getSubject();
+			password = PasswordHelper.encryptPassword(password);
+			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			subject.login(token);
+		} catch (UnknownAccountException e) {
+			return GSONUtils.toJson(result.error(e.getMessage()), true);
+		} catch (IncorrectCredentialsException e) {
+			return GSONUtils.toJson(result.error(e.getMessage()), true);
+		} catch (LockedAccountException e) {
+			return GSONUtils.toJson(result.error(e.getMessage()), true);
+		} catch (ExcessiveAttemptsException e) {
+			return GSONUtils.toJson(result.error(e.getMessage()), true);
+		} catch (AuthenticationException e) {
+			return GSONUtils.toJson(result.error("è´¦æˆ·éªŒè¯å¤±è´¥"), true);
+		}
+		return GSONUtils.toJson(result, true);
+	}
+
+	@RequestMapping("index")
+	public String index() {
+		return "index";
 	}
 }

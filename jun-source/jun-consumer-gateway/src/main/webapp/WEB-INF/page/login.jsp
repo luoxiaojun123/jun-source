@@ -97,11 +97,11 @@ var vm = new Vue({
 			    data: data,
 			    dataType: "json",
 			    success: function(result){
-					if(result.code == 0){//登录成功
-						parent.location.href ='index.html';
+					if(result.resCode == '200'){//登录成功
+						parent.location.href ='index';
 					}else{
 						vm.error = true;
-						vm.errorMsg = result.msg;
+						vm.errorMsg = result.resMsg;
 						
 						vm.refreshCode();
 					}

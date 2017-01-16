@@ -8,11 +8,10 @@ import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.service.SysUserService;
 
 /**
- * ÓÃ»§·þÎñÊµÏÖ
- * 
+ * ç³»ç»Ÿç”¨æˆ·serviceå®žçŽ°
  * @author xiaojun
- * @email lxjluoxiaojun@163.com
- * @date 2017Äê1ÔÂ12ÈÕ
+ * @email  lxjluoxiaojun@163.com
+ * @date   2017å¹´1æœˆ16æ—¥
  */
 @Service(interfaceName = "com.xiaojun.service.SysUserService")
 public class SysUserServiceImpl implements SysUserService {

@@ -1,14 +1,14 @@
 package com.xiaojun.service;
 import com.xiaojun.entity.SysUserEntity;
 /**
- * ÓÃ»§·şÎñ
+ * ç³»ç»Ÿç”¨æˆ·service
  * @author xiaojun
  * @email  lxjluoxiaojun@163.com
- * @date   2017Äê1ÔÂ12ÈÕ
+ * @date   2017å¹´1æœˆ16æ—¥
  */
 public interface SysUserService {
 	/**
-	 * ¸ù¾İÓÃ»§Ãû»ñÈ¡ÓÃ»§ĞÅÏ¢
+	 * æ ¹æ®ç”¨æˆ·åè·å–ç”¨æˆ·ä¿¡æ¯
 	 * @param userName
 	 * @return
 	 */

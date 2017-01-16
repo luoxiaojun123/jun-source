@@ -4,43 +4,43 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 /**
- * shiro¹¤¾ßÀà
+ * shiroï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author xiaojun
  * @email  lxjluoxiaojun@163.com
- * @date   2017Äê1ÔÂ13ÈÕ
+ * @date   2017ï¿½ï¿½1ï¿½ï¿½13ï¿½ï¿½
  */
 import com.xiaojun.entity.SysUserEntity;
 public class ShiroUtils {
 	/**
-	 * »ñÈ¡shiroµÄsession
+	 * è·å–session
 	 * @return
 	 */
 	public static Session getSession(){
 		return SecurityUtils.getSubject().getSession();
 	}
 	/**
-	 * »ñÈ¡Ö÷Ìâ
+	 * è·å–ä¸»é¢˜
 	 * @return
 	 */
 	public static Subject getSubject(){
 		return SecurityUtils.getSubject();
 	}
 	/**
-	 * ´ÓshiroÖĞ»ñÈ¡ÈÏÖ¤
+	 *è·å–ç”¨æˆ·ä¿¡æ¯ Ö¤
 	 * @return
 	 */
 	public static SysUserEntity getSysUserEntity(){
 		return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
 	}
 	/**
-	 * »ñÈ¡ÓÃ»§id
+	 * è·å–ç”¨æˆ·id
 	 * @return
 	 */
 	public static Integer getId() {
 		return getSysUserEntity().getId();
 	}
 	/**
-	 * ±£´æÊı¾İµ½sessionÖĞ
+	 * å°†å€¼å­˜å…¥sessionä¸­
 	 * @param key
 	 * @param value
 	 */
@@ -48,7 +48,7 @@ public class ShiroUtils {
 		getSession().setAttribute(key, value);
 	}
 	/**
-	 * »ñÈ¡sessionÖĞµÄÖµ
+	 * ä»sessionä¸­è·å–Öµ
 	 * @param key
 	 * @return
 	 */
@@ -56,20 +56,20 @@ public class ShiroUtils {
 		return getSession().getAttribute(key);
 	}
 	/**
-	 * ÅĞ¶ÏÓÃ»§ÊÇ·ñµÇÂ¼ÈÏÖ¤¹ı
+	 * åˆ¤æ–­æ˜¯å¦ç™»å½•
 	 * @return
 	 */
 	public static boolean isLogin() {
 		return SecurityUtils.getSubject().getPrincipal() != null;
 	}
 	/**
-	 * ÍË³öµÇÂ¼
+	 * é€€å‡º
 	 */
 	public static void logout() {
 		SecurityUtils.getSubject().logout();
 	}
 	/**
-	 * ´ÓsessionÖĞ»ñÈ¡ÑéÖ¤Âë
+	 * è·å–éªŒè¯ç 
 	 * @param key
 	 * @return
 	 */

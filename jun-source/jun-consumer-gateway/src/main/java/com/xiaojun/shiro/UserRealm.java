@@ -16,30 +16,30 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.service.SysUserService;
 
 /**
- * ÈÏÖ¤ºÍÊÚÈ¨realm
+ * è‡ªå®šä¹‰realm
  * 
  * @author xiaojun
  * @email lxjluoxiaojun@163.com
- * @date 2017Äê1ÔÂ12ÈÕ
+ * @date 2017å¹´1æœˆ16æ—¥
  */
 public class UserRealm extends AuthorizingRealm {
 
-	@Reference
 	private SysUserService sysUserService;
 
+	// è·å–ç¼“å­˜
 	private Cache<String, AtomicInteger> passwordRetryCache;
 
-	public UserRealm(CacheManager cacheManager) {
+	public UserRealm(CacheManager cacheManager, SysUserService sysUserService) {
+		this.sysUserService = sysUserService;
 		passwordRetryCache = cacheManager.getCache("passwordRetryCache");
 	}
 
 	/**
-	 * ÊÚÈ¨
+	 * æˆæƒ
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
@@ -47,36 +47,37 @@ public class UserRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * ÈÏÖ¤
+	 * è®¤è¯
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		// ´ÓtokenÖĞ»ñÈ¡ÓÃ»§ÃûºÍÃÜÂë
+		// è·å–ç”¨æˆ·åå’Œå¯†ç 
 		String username = (String) token.getPrincipal();
 		String password = new String((char[]) token.getCredentials());
-		// ´ÓÊı¾İ¿âÀï»ñÈ¡ÓÃ»§ĞÅÏ¢
+		// è·å–ç”¨æˆ·
 		SysUserEntity user = sysUserService.selectSysUserByUserName(username);
-		// ÕËºÅ²»´æÔÚ
+		// è´¦å·ä¸å­˜åœ¨
 		if (user == null) {
-			throw new UnknownAccountException("ÕËºÅ»òÃÜÂë²»ÕıÈ·");
+			throw new UnknownAccountException("è´¦å·æˆ–å¯†ç ä¸æ­£ç¡®");
 		}
+
 		AtomicInteger retryCount = passwordRetryCache.get(user.getUsername());
 		if (retryCount == null) {
 			retryCount = new AtomicInteger(0);
 			passwordRetryCache.put(user.getUsername(), retryCount);
 		}
-		// ×Ô¶¨ÒåÒ»¸öÑéÖ¤¹ı³Ì£ºµ±ÓÃ»§Á¬ĞøÊäÈëÃÜÂë´íÎó3´ÎÒÔÉÏ½ûÖ¹ÓÃ»§µÇÂ¼Ò»¶ÎÊ±¼ä
+		// è‡ªå®šä¹‰ä¸€ä¸ªéªŒè¯è¿‡ç¨‹ï¼šå½“ç”¨æˆ·è¿ç»­è¾“å…¥å¯†ç é”™è¯¯3æ¬¡ä»¥ä¸Šç¦æ­¢ç”¨æˆ·ç™»å½•ä¸€æ®µæ—¶é—´
 		if (retryCount.incrementAndGet() > 3) {
-			throw new ExcessiveAttemptsException("ÃÜÂëÊäÈë´íÎó³¬¹ı3´Î,Çë¹ı¶ÎÊ±¼äÖØÊÔ");
+			throw new ExcessiveAttemptsException("å¯†ç è¾“å…¥é”™è¯¯è¶…è¿‡3æ¬¡,è¯·è¿‡æ®µæ—¶é—´é‡è¯•");
 		}
-		// ÃÜÂë´íÎó
+		// å¯†ç é”™è¯¯
 		if (!password.equals(user.getPassword())) {
-			throw new IncorrectCredentialsException("ÕËºÅ»òÃÜÂë²»ÕıÈ·");
+			throw new IncorrectCredentialsException("è´¦å·æˆ–å¯†ç ä¸æ­£ç¡®");
 		}
 		passwordRetryCache.remove(user.getUsername());
-		// ÕËºÅËø¶¨
+		// è´¦å·é”å®š
 		if ("2".equals(user.getStatus())) {
-			throw new LockedAccountException("ÕËºÅÒÑ±»½ûÓÃ,ÇëÁªÏµ¹ÜÀíÔ±");
+			throw new LockedAccountException("è´¦å·å·²è¢«é”å®š,è¯·è”ç³»ç®¡ç†å‘˜");
 		}
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
 		return info;
