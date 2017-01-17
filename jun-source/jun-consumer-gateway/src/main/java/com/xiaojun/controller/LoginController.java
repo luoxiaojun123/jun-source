@@ -109,4 +109,9 @@ public class LoginController {
 		ShiroUtils.logout();
 		return "login";
 	}
+	
+	@RequestMapping("error")
+	public String error() {
+		return "error";
+	}
 }
