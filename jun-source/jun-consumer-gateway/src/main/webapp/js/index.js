@@ -37,8 +37,8 @@ var vm = new Vue({
 			});
 		},
 		getUser: function(){
-			$.getJSON("sys/user/info?_"+$.now(), function(r){
-				vm.user = r.user;
+			$.getJSON("user/getUserInfo?_"+$.now(), function(r){
+				vm.user = r.result;
 			});
 		},
 		updatePassword: function(){
@@ -73,7 +73,7 @@ var vm = new Vue({
 		}
 	},
 	created: function(){
-		this.getMenuList();
+		//this.getMenuList();
 		this.getUser();
 	},
 	updated: function(){
