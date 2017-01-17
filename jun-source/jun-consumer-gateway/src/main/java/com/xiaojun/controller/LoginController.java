@@ -17,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
@@ -40,7 +41,7 @@ public class LoginController {
 	@Autowired
 	private Producer producer;
 
-	@RequestMapping("/")
+	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
@@ -65,7 +66,7 @@ public class LoginController {
 		ImageIO.write(image, "jpg", out);
 	}
 
-	@RequestMapping("login")
+	@RequestMapping(value="login",method=RequestMethod.POST)
 	@ResponseBody
 	public String login(String username, String password, String captcha) throws IOException {
 		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
@@ -96,5 +97,16 @@ public class LoginController {
 	@RequestMapping("index")
 	public String index() {
 		return "index";
+	}
+
+	@RequestMapping("main")
+	public String main() {
+		return "main";
+	}
+
+	@RequestMapping("logout")
+	public String logout() {
+		ShiroUtils.logout();
+		return "login";
 	}
 }

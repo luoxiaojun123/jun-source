@@ -29,12 +29,15 @@
 	</bean>
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"></property>
-		<property name="loginUrl" value="/login.jsp"></property>
-		<property name="successUrl" value="/index.jsp"></property>
+		<property name="loginUrl" value="/login"></property>
+		<property name="successUrl" value="/index"></property>
 		<property name="unauthorizedUrl" value="/"></property>
 		<property name="filterChainDefinitions">
 			<value>
+				/statics/**=anon
 				/captcha.jpg=anon
+				/login=anon
+				/**=authc
 			</value>
 		</property>
 	</bean>

@@ -83,7 +83,7 @@
 
     <!-- Main content -->
     <section class="content" style="background:#fff;">
-      <iframe scrolling="yes" frameborder="0" style="width:100%;min-height:1000px;overflow:visible;background:#fff;" :src="main"></iframe>
+      <iframe scrolling="yes" frameborder="0" style="width:100%;min-height:1000px;overflow:visible;background:#fff;" src="main"></iframe>
     </section>
     <!-- /.content -->
   </div>
