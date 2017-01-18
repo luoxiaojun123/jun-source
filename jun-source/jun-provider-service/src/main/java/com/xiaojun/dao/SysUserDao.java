@@ -1,12 +1,27 @@
 package com.xiaojun.dao;
 
-import com.xiaojun.entity.SysUserEntity;
+import java.util.Map;
 
+import com.xiaojun.entity.SysUserEntity;
+import com.xiaojun.exception.CustomException;
+/**
+ * ç³»ç»Ÿç”¨æˆ·dao
+ * @author xiaojun
+ * @email  lxjluoxiaojun@163.com
+ * @date   2017å¹´1æœˆ18æ—¥
+ */
 public interface SysUserDao extends BeseDao<SysUserEntity>{
 
 	/**
-	 * ¸ù¾İĞÕÃû²éÕÒÓÃ»§ĞÅÏ¢
+	 * æ ¹æ®ç”¨æˆ·åè·å–ç”¨æˆ·ä¿¡æ¯
+	 * @param username
 	 * @return
 	 */
-	public SysUserEntity selectSysUserByUserName(String username);
+	public SysUserEntity selectSysUserByUserName(String username) throws CustomException;
+	/**
+	 * æ ¹æ®ç”¨æˆ·åæ›´æ–°å¯†ç 
+	 * @param map
+	 * @return
+	 */
+	public int updatePassword(Map<String, Object> map) throws CustomException;
 }

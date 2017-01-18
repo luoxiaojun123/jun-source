@@ -109,7 +109,13 @@
 		<div class="form-group">
 		   	<div class="col-sm-2 control-label">新密码</div>
 		   	<div class="col-sm-10">
-		      <input type="text" class="form-control" v-model="newPassword" placeholder="新密码"/>
+		      <input type="password" class="form-control" v-model="newPassword" placeholder="新密码"/>
+		    </div>
+		</div>
+		<div class="form-group">
+		   	<div class="col-sm-2 control-label">重新输入新密码</div>
+		   	<div class="col-sm-10">
+		      <input type="password" class="form-control" v-model="newPassword2" placeholder="重新输入新密码"/>
 		    </div>
 		</div>
 	</div>

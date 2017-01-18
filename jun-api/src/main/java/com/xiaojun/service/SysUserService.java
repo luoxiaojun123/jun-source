@@ -1,4 +1,6 @@
 package com.xiaojun.service;
+import java.util.Map;
+
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 /**
@@ -14,4 +16,11 @@ public interface SysUserService {
 	 * @return
 	 */
 	public SysUserEntity selectSysUserByUserName(String userName) throws CustomException;
+	/**
+	 * 根据用户名更新密码
+	 * @param map
+	 * @return
+	 * @throws CustomException
+	 */
+	public int updatePassword(Map<String, Object> map) throws CustomException;
 }

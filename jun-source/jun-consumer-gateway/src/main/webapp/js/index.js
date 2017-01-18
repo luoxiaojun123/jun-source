@@ -28,6 +28,7 @@ var vm = new Vue({
 		main:"main",
 		password:'',
 		newPassword:'',
+		newPassword2:'',
         navTitle:"控制台"
 	},
 	methods: {
@@ -49,25 +50,30 @@ var vm = new Vue({
 				type: 1,
 				skin: 'layui-layer-molv',
 				title: "修改密码",
-				area: ['550px', '270px'],
+				area: ['620px', '320px'],
 				shadeClose: false,
 				content: jQuery("#passwordLayer"),
 				btn: ['修改','取消'],
 				btn1: function (index) {
-					var data = "password="+vm.password+"&newPassword="+vm.newPassword;
+					if(vm.newPassword2!=vm.newPassword){
+						vm.newPassword2='';
+						layer.alert("新密码输入二次不一致，请重新输入");
+						return;
+					}
+					var data = "oldPassword="+vm.password+"&newPassword="+vm.newPassword;
 					$.ajax({
 						type: "POST",
-					    url: "sys/user/password",
+					    url: "user/updatePassword",
 					    data: data,
 					    dataType: "json",
 					    success: function(result){
-							if(result.code == 0){
+							if(result.resCode == '200'){
 								layer.close(index);
 								layer.alert('修改成功', function(index){
 									location.reload();
 								});
 							}else{
-								layer.alert(result.msg);
+								layer.alert(result.resMsg);
 							}
 						}
 					});

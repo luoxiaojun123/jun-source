@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xiaojun.dao.SysUserDao">
-
 	<select id="selectSysUserByUserName" resultType="com.xiaojun.entity.SysUserEntity"
 		parameterType="String">
 		SELECT
@@ -21,4 +20,9 @@
 			sys_user u
 		WHERE u.username=#{username}
 	</select>
+	<update id="updatePassword" parameterType="map">
+		update sys_user 
+			set password=#{newPassword},update_time=SYSDATE(),update_name=#{update_name} 
+		where username=#{username} and password=#{oldPassword}
+	</update>
 </mapper>

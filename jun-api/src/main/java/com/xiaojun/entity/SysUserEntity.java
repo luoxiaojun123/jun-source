@@ -1,7 +1,12 @@
 package com.xiaojun.entity;
 
 import java.io.Serializable;
-
+/**
+ * ç”¨æˆ·entity
+ * @author xiaojun
+ * @email  lxjluoxiaojun@163.com
+ * @date   2017å¹´1æœˆ18æ—¥
+ */
 public class SysUserEntity  implements Serializable{
 
 	/**
@@ -9,47 +14,47 @@ public class SysUserEntity  implements Serializable{
 	 */
 	private static final long serialVersionUID = 4264694101670929097L;
 	/**
-	 * Ö÷¼üid
+	 * ä¸»é”®id
 	 */
 	private Integer id;
 	/**
-	 * ÓÃ»§Ãû
+	 * ç”¨æˆ·å
 	 */
 	private String username;
 	/**
-	 * ÃÜÂë
+	 * å¯†ç 
 	 */
 	private String password;
 	/**
-	 * ÑÎ
+	 * ç›
 	 */
 	private String salt;
 	/**
-	 * µç×ÓÓÊÏä
+	 * é‚®ç®±
 	 */
 	private String email;
 	/**
-	 * ÊÖ»úµç»°
+	 * æ‰‹æœºå·ç 
 	 */
 	private String mobile;
 	/**
-	 * ÓÃ»§×´Ì¬
+	 * ç”¨æˆ·çŠ¶æ€×´Ì¬
 	 */
 	private String status;
 	/**
-	 * ´´½¨Ê±¼ä
+	 * åˆ›å»ºæ—¶é—´
 	 */
 	private String createTime;
 	/**
-	 * ´´½¨ÈË
+	 * åˆ›å»ºäºº
 	 */
 	private String createName;
 	/**
-	 * ¸üĞÂÊ±¼ä
+	 * æ›´æ–°æ—¶é—´
 	 */
 	private String updateTime;
 	/**
-	 * ¸üĞÂÈË
+	 * æ›´æ–°äºº
 	 */
 	private String updateName;
 

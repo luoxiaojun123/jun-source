@@ -1,5 +1,7 @@
 package com.xiaojun.service.impl;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +32,12 @@ public class SysUserServiceImpl implements SysUserService {
 			logger.debug("查询用户信息根据：" + username);
 		}
 		return sysUserDao.selectSysUserByUserName(username);
+	}
+
+	@Override
+	public int updatePassword(Map<String, Object> map) throws CustomException {
+		int num = sysUserDao.updatePassword(map);
+		return num;
 	}
 
 }

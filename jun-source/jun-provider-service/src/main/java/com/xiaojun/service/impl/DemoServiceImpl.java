@@ -32,7 +32,7 @@ public class DemoServiceImpl implements DemoService {
 	@Override
 	public String result(Integer id) {
 		// TODO Auto-generated method stub
-		//Ò»¸ö·½·¨ÖĞ»ñÈ¡µ±Ç°´úÀíÀà
+		//è·å–ä»£ç†ç±»
 		DemoServiceImpl demoServiceImpl=(DemoServiceImpl) AopContext.currentProxy();
 		return demoServiceImpl.sayHello(id)+"---------"+demoServiceImpl.sayHello_salve(id);
 	}

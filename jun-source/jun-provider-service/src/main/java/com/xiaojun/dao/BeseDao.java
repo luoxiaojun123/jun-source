@@ -3,10 +3,10 @@ package com.xiaojun.dao;
 import java.util.List;
 import java.util.Map;
 /**
- * »ù´¡Dao ĞèÒª¶ÔÓ¦Ã¿¸öxml¶¼ÓĞÏàÓ¦µÄsql
+ * åŸºç¡€DAO å¦‚æœéœ€è¦éœ€åœ¨å„ä¸ªxmlä¸­å†™sql
  * @author xiaojun
  * @email  lxjluoxiaojun@163.com
- * @date   2017Äê1ÔÂ10ÈÕ
+ * @date   2017å¹´1æœˆ18æ—¥
  * @param <T>
  */
 public interface BeseDao<T> {
