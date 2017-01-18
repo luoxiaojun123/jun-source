@@ -38,6 +38,9 @@ var vm = new Vue({
 		},
 		getUser: function(){
 			$.getJSON("user/getUserInfo?_"+$.now(), function(r){
+				if(r.resCode!='200'){
+					layer.alert(r.resMsg);
+				}
 				vm.user = r.result;
 			});
 		},

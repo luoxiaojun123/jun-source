@@ -28,7 +28,6 @@ public class SysUserController {
 	@RequestMapping("getUserInfo")
 	@ResponseBody
 	public String getUserInfo() throws Exception {
-		int a=1/0;
 		Result<SysUserEntity> result=new Result<>();
 		SysUserEntity user = ShiroUtils.getSysUserEntity();
 		result.setResult(user);

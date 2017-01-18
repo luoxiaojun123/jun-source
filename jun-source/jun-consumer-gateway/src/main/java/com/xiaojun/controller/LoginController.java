@@ -41,7 +41,7 @@ public class LoginController {
 	@Autowired
 	private Producer producer;
 
-	@RequestMapping(value="/login",method=RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
@@ -66,7 +66,7 @@ public class LoginController {
 		ImageIO.write(image, "jpg", out);
 	}
 
-	@RequestMapping(value="login",method=RequestMethod.POST)
+	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public String login(String username, String password, String captcha) throws IOException {
 		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
@@ -108,10 +108,5 @@ public class LoginController {
 	public String logout() {
 		ShiroUtils.logout();
 		return "login";
-	}
-	
-	@RequestMapping("error")
-	public String error() {
-		return "error";
 	}
 }
