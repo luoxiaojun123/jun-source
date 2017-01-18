@@ -1,5 +1,6 @@
 package com.xiaojun.service;
 import com.xiaojun.entity.SysUserEntity;
+import com.xiaojun.exception.CustomException;
 /**
  * 系统用户service
  * @author xiaojun
@@ -12,5 +13,5 @@ public interface SysUserService {
 	 * @param userName
 	 * @return
 	 */
-	public SysUserEntity selectSysUserByUserName(String userName);
+	public SysUserEntity selectSysUserByUserName(String userName) throws CustomException;
 }

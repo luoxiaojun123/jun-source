@@ -3,6 +3,7 @@ package com.xiaojun.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +18,9 @@ import com.xiaojun.util.Result;
  * @date 2017年1月17日
  */
 public class CustomExceptionResolver implements HandlerExceptionResolver {
-
+	
+	private static Logger logger=Logger.getLogger(CustomExceptionResolver.class);
+ 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
@@ -25,12 +28,15 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 		if (ex instanceof CustomException) {
 			CustomException customException = (CustomException) ex;
 			result.error(customException.getMsg());
+			logger.error("业务异常",ex);
 		} else {
 			result.error("未知异常");
+			logger.error("未知异常",ex);
 		}
 		try {
 			response.getWriter().println(GSONUtils.toJson(result, true));
 		} catch (Exception e) {
+			logger.error("还是出错了",e);
 		}
 		return new ModelAndView();
 	}

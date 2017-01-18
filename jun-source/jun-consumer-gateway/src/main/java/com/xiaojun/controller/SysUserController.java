@@ -1,5 +1,6 @@
 package com.xiaojun.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,7 @@ import com.xiaojun.util.Result;
 @Controller
 @RequestMapping("user")
 public class SysUserController {
-
+	private Logger logger = Logger.getLogger(getClass());
 	/**
 	 * 获取用户基本信息
 	 * 
@@ -31,6 +32,8 @@ public class SysUserController {
 		Result<SysUserEntity> result=new Result<>();
 		SysUserEntity user = ShiroUtils.getSysUserEntity();
 		result.setResult(user);
-		return GSONUtils.toJson(result, true);
+		String resultJson=GSONUtils.toJson(result, true);
+		logger.info("返回用户json"+resultJson);
+		return resultJson;
 	}
 }
