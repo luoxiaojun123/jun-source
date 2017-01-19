@@ -27,8 +27,7 @@ import com.xiaojun.util.Result;
  */
 @Controller
 @RequestMapping("user")
-public class SysUserController {
-	private Logger logger = Logger.getLogger(getClass());
+public class SysUserController extends BaseController {
 	/**
 	 * 用户service
 	 */

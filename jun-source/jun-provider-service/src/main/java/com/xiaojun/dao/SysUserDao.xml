@@ -21,8 +21,20 @@
 		WHERE u.username=#{username}
 	</select>
 	<update id="updatePassword" parameterType="map">
-		update sys_user 
-			set password=#{newPassword},update_time=SYSDATE(),update_name=#{update_name} 
+		update sys_user
+		set
+			password=#{newPassword},update_time=SYSDATE(),update_name=#{update_name}
 		where username=#{username} and password=#{oldPassword}
 	</update>
+
+	<!-- 查询用户所有目录 -->
+	<select id="queryAllCatalogList" resultType="com.xiaojun.entity.SysMenuEntity">
+		SELECT
+			m.*
+		FROM
+			sys_user_role ur
+			LEFT JOIN sys_role_menu rm ON ur.roleId=rm.roleId
+			LEFT JOIN sys_menu m ON rm.menuId=m.id
+		WHERE ur.userId=#{userId} AND m.type = 1
+	</select>
 </mapper>

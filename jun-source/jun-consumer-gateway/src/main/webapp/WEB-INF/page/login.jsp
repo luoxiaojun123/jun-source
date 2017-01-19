@@ -102,7 +102,6 @@ var vm = new Vue({
 					}else{
 						vm.error = true;
 						vm.errorMsg = result.resMsg;
-						
 						vm.refreshCode();
 					}
 				}

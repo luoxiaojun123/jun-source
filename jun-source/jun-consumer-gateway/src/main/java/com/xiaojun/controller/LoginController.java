@@ -36,7 +36,7 @@ import com.xiaojun.util.Result;
  */
 @Controller
 @RequestMapping("")
-public class LoginController {
+public class LoginController extends BaseController {
 
 	@Autowired
 	private Producer producer;

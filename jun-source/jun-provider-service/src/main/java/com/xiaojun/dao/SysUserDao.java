@@ -1,7 +1,9 @@
 package com.xiaojun.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import com.xiaojun.entity.SysMenuEntity;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 /**
@@ -24,4 +26,11 @@ public interface SysUserDao extends BeseDao<SysUserEntity>{
 	 * @return
 	 */
 	public int updatePassword(Map<String, Object> map) throws CustomException;
+	/**
+	 * 查询用户的所有菜单ID
+	 * @param userId
+	 * @return
+	 * @throws CustomException
+	 */
+	public List<SysMenuEntity> queryAllCatalogList(Integer userId) throws CustomException;
 }
