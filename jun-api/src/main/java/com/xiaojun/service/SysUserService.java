@@ -2,6 +2,7 @@ package com.xiaojun.service;
 import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
+import com.xiaojun.dto.UserDTO;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 /**
@@ -31,6 +32,6 @@ public interface SysUserService {
 	 * @return
 	 * @throws CustomException
 	 */
-	public PageInfo<SysUserEntity> queryList(Map<String, Object> map) throws CustomException;
+	public PageInfo<SysUserEntity> queryList(UserDTO dto) throws CustomException;
 	
 }

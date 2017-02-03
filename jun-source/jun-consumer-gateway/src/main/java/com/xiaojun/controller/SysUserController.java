@@ -1,7 +1,6 @@
 package com.xiaojun.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
+import com.xiaojun.dto.UserDTO;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 import com.xiaojun.service.SysUserService;
@@ -77,13 +77,18 @@ public class SysUserController extends BaseController {
 		ShiroUtils.logout();
 		return GSONUtils.toJson(result, true);
 	}
-	
-	@RequestMapping("queryList")
+
+	@RequestMapping("list")
+	public String user(Map<String, Object> map) {
+		return "user";
+	}
+
+	@RequestMapping("getUserList")
 	@ResponseBody
-	public String queryList(Map<String, Object> map){
-		map.put("status", "1");
-		PageInfo<SysUserEntity> pageInfo=sysUserService.queryList(map);
-		List<SysUserEntity> list=pageInfo.getList();
-		return GSONUtils.toJson(list, true);
+	public Map<String, Object> getUserList(UserDTO dto) {
+		PageInfo<SysUserEntity> pageInfo = sysUserService.queryList(dto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageInfo", pageInfo);
+		return map;
 	}
 }

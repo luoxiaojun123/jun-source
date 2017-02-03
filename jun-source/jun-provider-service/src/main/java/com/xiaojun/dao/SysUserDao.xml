@@ -5,44 +5,45 @@
 	<select id="selectSysUserByUserName" resultType="com.xiaojun.entity.SysUserEntity"
 		parameterType="String">
 		SELECT
-			u.id,
-			u.username,
-			u.`password`,
-			u.salt,
-			u.email,
-			u.mobile,
-			u.`status`,
-			u.create_time,
-			u.create_name,
-			u.update_time,
-			u.update_name
+		u.id,
+		u.username,
+		u.`password`,
+		u.salt,
+		u.email,
+		u.mobile,
+		u.`status`,
+		u.create_time,
+		u.create_name,
+		u.update_time,
+		u.update_name
 		FROM
-			sys_user u
+		sys_user u
 		WHERE u.username=#{username}
 	</select>
 	<update id="updatePassword" parameterType="map">
 		update sys_user
 		set
-			password=#{newPassword},update_time=SYSDATE(),update_name=#{update_name}
+		password=#{newPassword},update_time=SYSDATE(),update_name=#{update_name}
 		where username=#{username} and password=#{oldPassword}
 	</update>
 
 	<!-- 查询用户所有目录 -->
 	<select id="queryAllCatalogList" resultType="com.xiaojun.entity.SysMenuEntity">
 		SELECT
-			m.*
+		m.*
 		FROM
-			sys_user_role ur
-			LEFT JOIN sys_role_menu rm ON ur.roleId=rm.roleId
-			LEFT JOIN sys_menu m ON rm.menuId=m.id
-		WHERE ur.userId=#{userId} AND m.type = 1
+		sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.roleId=rm.roleId
+		LEFT JOIN sys_menu m ON rm.menuId=m.id
+		WHERE ur.userId=#{userId} AND m.type
+		= 1
 	</select>
-	
+
 	<!-- 查询用户所有目录 -->
 	<select id="queryList" resultType="com.xiaojun.entity.SysUserEntity">
 		SELECT * FROM sys_user WHERE 1=1
-		<if test="status !=null and status!=''">
-			AND status=#{status}
+		<if test="userName !=null and userName!=''">
+			AND username=#{userName}
 		</if>
 	</select>
 </mapper>

@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '../sys/user/list',
+        url: 'getUserList',
         datatype: "json",
         colModel: [			
 			{ label: '用户ID', name: 'userId', width: 45, key: true,hidden:true },
@@ -24,14 +24,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "pageInfo.list",
+            page: "pageInfo.pageNum",
+            total: "pageInfo.pages",
+            records: "pageInfo.total"
         },
         prmNames : {
             page:"page", 
-            rows:"limit", 
+            rows:"rows", 
             order: "order"
         },
         gridComplete:function(){
