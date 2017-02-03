@@ -37,4 +37,12 @@
 			LEFT JOIN sys_menu m ON rm.menuId=m.id
 		WHERE ur.userId=#{userId} AND m.type = 1
 	</select>
+	
+	<!-- 查询用户所有目录 -->
+	<select id="queryList" resultType="com.xiaojun.entity.SysUserEntity">
+		SELECT * FROM sys_user WHERE 1=1
+		<if test="status !=null and status!=''">
+			AND status=#{status}
+		</if>
+	</select>
 </mapper>

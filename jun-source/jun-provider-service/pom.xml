@@ -37,6 +37,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-version}</version>
 		</dependency>
+		<!-- pagehelper分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper-version}</version>
+		</dependency>
 		<!-- aspectj依赖包 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

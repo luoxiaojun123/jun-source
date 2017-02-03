@@ -106,7 +106,6 @@ function routerList(router, menuList){
 				
 				//替换iframe的url
 			    vm.main = url.replace('#', '');
-			    
 			    //导航菜单展开
 			    $(".treeview-menu li").removeClass("active");
 			    $("a[href='"+url+"']").parents("li").addClass("active");

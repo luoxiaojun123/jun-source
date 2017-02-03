@@ -37,4 +37,9 @@ public class SysMenuController extends BaseController {
 		result.setResult(menuList);
 		return GSONUtils.toJson(result, true);
 	}
+	
+	@RequestMapping("list")
+	public String list() {
+		return "menuList";
+	}
 }

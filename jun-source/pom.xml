@@ -20,6 +20,7 @@
 		<kaptcha-version>0.0.9</kaptcha-version>
 		<jstl-version>1.2</jstl-version>
 		<taglibs-version>1.1.2</taglibs-version>
+		<pagehelper-version>4.1.6</pagehelper-version>
 	</properties>
 	<profiles>
 		<profile>

@@ -1,6 +1,7 @@
 package com.xiaojun.service;
 import java.util.Map;
 
+import com.github.pagehelper.PageInfo;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 /**
@@ -23,4 +24,13 @@ public interface SysUserService {
 	 * @throws CustomException
 	 */
 	public int updatePassword(Map<String, Object> map) throws CustomException;
+	
+	/**
+	 * 查询用户集合
+	 * @param map
+	 * @return
+	 * @throws CustomException
+	 */
+	public PageInfo<SysUserEntity> queryList(Map<String, Object> map) throws CustomException;
+	
 }

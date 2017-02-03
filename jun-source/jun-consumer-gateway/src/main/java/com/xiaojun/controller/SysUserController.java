@@ -1,15 +1,16 @@
 package com.xiaojun.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.pagehelper.PageInfo;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 import com.xiaojun.service.SysUserService;
@@ -75,5 +76,14 @@ public class SysUserController extends BaseController {
 		sysUserService.updatePassword(map);
 		ShiroUtils.logout();
 		return GSONUtils.toJson(result, true);
+	}
+	
+	@RequestMapping("queryList")
+	@ResponseBody
+	public String queryList(Map<String, Object> map){
+		map.put("status", "1");
+		PageInfo<SysUserEntity> pageInfo=sysUserService.queryList(map);
+		List<SysUserEntity> list=pageInfo.getList();
+		return GSONUtils.toJson(list, true);
 	}
 }

@@ -1,17 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.luoxiaojun</groupId>
-  <artifactId>jun-api</artifactId>
-  <version>1.0.0</version>
-  <properties>
-  	<gson-version>2.6.2</gson-version>
-  </properties>
-  <dependencies>
-  	<!-- gson依赖包 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.luoxiaojun</groupId>
+	<artifactId>jun-api</artifactId>
+	<version>1.0.0</version>
+	<properties>
+		<gson-version>2.6.2</gson-version>
+		<pagehelper-version>4.1.6</pagehelper-version>
+	</properties>
+	<dependencies>
+		<!-- gson依赖包 -->
 		<dependency>
-    		<groupId>com.google.code.gson</groupId>
-   			<artifactId>gson</artifactId>
-    		<version>${gson-version}</version>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson-version}</version>
 		</dependency>
-  </dependencies>
+		<!-- pagehelper分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper-version}</version>
+		</dependency>
+	</dependencies>
 </project>

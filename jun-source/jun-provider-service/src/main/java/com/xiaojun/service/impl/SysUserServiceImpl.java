@@ -1,11 +1,14 @@
 package com.xiaojun.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xiaojun.dao.SysUserDao;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
@@ -40,4 +43,11 @@ public class SysUserServiceImpl implements SysUserService {
 		return num;
 	}
 
+	@Override
+	public PageInfo<SysUserEntity> queryList(Map<String, Object> map) throws CustomException {
+		PageHelper.startPage(1, 10);
+		List<SysUserEntity> list = sysUserDao.queryList(map);
+		PageInfo<SysUserEntity> pageInfo = new PageInfo<>(list);
+		return pageInfo;
+	}
 }
