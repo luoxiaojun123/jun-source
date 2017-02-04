@@ -1,6 +1,7 @@
 package com.xiaojun.entity;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * 用户entity
  * @author xiaojun
@@ -57,8 +58,10 @@ public class SysUserEntity  implements Serializable{
 	 * 更新人
 	 */
 	private String updateName;
-
-
+	/**
+	 * 用户角色id
+	 */
+	List<Integer> roleIdList;
 	public Integer getId() {
 		return id;
 	}
@@ -147,4 +150,11 @@ public class SysUserEntity  implements Serializable{
 		this.updateName = updateName;
 	}
 
+	public List<Integer> getRoleIdList() {
+		return roleIdList;
+	}
+
+	public void setRoleIdList(List<Integer> roleIdList) {
+		this.roleIdList = roleIdList;
+	}
 }
