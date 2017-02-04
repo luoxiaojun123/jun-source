@@ -58,6 +58,7 @@ public class SysUserEntity  implements Serializable{
 	 */
 	private String updateName;
 
+
 	public Integer getId() {
 		return id;
 	}

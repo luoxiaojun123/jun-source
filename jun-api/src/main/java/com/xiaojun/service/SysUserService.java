@@ -33,5 +33,12 @@ public interface SysUserService {
 	 * @throws CustomException
 	 */
 	public PageInfo<SysUserEntity> queryList(UserDTO dto) throws CustomException;
+	/**
+	 * 根据用户id查询用户信息
+	 * @param userId
+	 * @return
+	 * @throws CustomException
+	 */
+	public SysUserEntity getUserInfoByUserId(Integer userId) throws CustomException;
 	
 }

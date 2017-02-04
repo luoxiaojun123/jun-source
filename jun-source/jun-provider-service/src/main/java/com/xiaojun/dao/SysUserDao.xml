@@ -46,4 +46,9 @@
 			AND username=#{userName}
 		</if>
 	</select>
+	
+	<!-- 查询用户所有目录 -->
+	<select id="getUserInfoByUserId" resultType="com.xiaojun.entity.SysUserEntity">
+		SELECT * FROM sys_user WHERE id=#{userId}
+	</select>
 </mapper>

@@ -33,4 +33,12 @@ public interface SysUserDao extends BeseDao<SysUserEntity>{
 	 * @throws CustomException
 	 */
 	public List<SysMenuEntity> queryAllCatalogList(Integer userId) throws CustomException;
+	
+	/**
+	 * 根据用户id查询用户信息
+	 * @param userId
+	 * @return
+	 * @throws CustomException
+	 */
+	public SysUserEntity getUserInfoByUserId(Integer userId) throws CustomException;
 }

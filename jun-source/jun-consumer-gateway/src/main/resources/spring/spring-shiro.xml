@@ -19,10 +19,14 @@
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml"></property>
 	</bean>
-	<dubbo:reference id="sysUserService" interface="com.xiaojun.service.SysUserService" />
+	<dubbo:reference id="sysUserService"
+		interface="com.xiaojun.service.SysUserService" />
+	<dubbo:reference id="sysMenuService"
+		interface="com.xiaojun.service.SysMenuService" />
 	<bean id="userRealm" class="com.xiaojun.shiro.UserRealm">
 		<constructor-arg name="cacheManager" ref="cacheManager" />
 		<constructor-arg name="sysUserService" ref="sysUserService" />
+		<constructor-arg name="sysMenuService" ref="sysMenuService" />
 	</bean>
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm"></property>
@@ -41,14 +45,5 @@
 			</value>
 		</property>
 	</bean>
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-	<bean
-		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-		depends-on="lifecycleBeanPostProcessor">
-		<property name="proxyTargetClass" value="true" />
-	</bean>
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
+
 </beans>

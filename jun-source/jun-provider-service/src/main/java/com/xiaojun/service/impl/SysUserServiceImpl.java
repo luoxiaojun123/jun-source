@@ -48,10 +48,16 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public PageInfo<SysUserEntity> queryList(UserDTO dto) throws CustomException {
 		PageHelper.startPage(dto.getPage(), dto.getRows());
+		PageHelper.orderBy("id desc");
 		Map<String, Object> map = new HashMap<>();
 		map.put("userName", dto.getUserName());
 		List<SysUserEntity> list = sysUserDao.queryList(map);
 		PageInfo<SysUserEntity> pageInfo = new PageInfo<>(list);
 		return pageInfo;
+	}
+
+	@Override
+	public SysUserEntity getUserInfoByUserId(Integer userId) throws CustomException {
+		return sysUserDao.getUserInfoByUserId(userId);
 	}
 }

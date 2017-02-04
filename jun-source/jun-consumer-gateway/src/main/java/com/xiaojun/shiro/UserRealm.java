@@ -1,5 +1,9 @@
 package com.xiaojun.shiro;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,12 +15,14 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.xiaojun.entity.SysUserEntity;
+import com.xiaojun.service.SysMenuService;
 import com.xiaojun.service.SysUserService;
 
 /**
@@ -30,20 +36,36 @@ public class UserRealm extends AuthorizingRealm {
 
 	private SysUserService sysUserService;
 
+	private SysMenuService sysMenuService;
+
 	// 获取缓存
 	private Cache<String, AtomicInteger> passwordRetryCache;
 
-	public UserRealm(CacheManager cacheManager, SysUserService sysUserService) {
+	public UserRealm(CacheManager cacheManager, SysUserService sysUserService, SysMenuService sysMenuService) {
 		this.sysUserService = sysUserService;
-		passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+		this.passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+		this.sysMenuService = sysMenuService;
 	}
 
 	/**
 	 * 授权
 	 */
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
-		return null;
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
+		Integer userId = user.getId();
+		List<String> perms = sysMenuService.queryAllPermsByUserId(userId);
+		// 用户权限列表
+		Set<String> permsSet = new HashSet<String>();
+		for (String perm : perms) {
+			if (perm == null) {
+				continue;
+			}
+			permsSet.addAll(Arrays.asList(perm.trim().split(",")));
+		}
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		info.setStringPermissions(permsSet);
+		return info;
 	}
 
 	/**

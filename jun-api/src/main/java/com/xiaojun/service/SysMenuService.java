@@ -21,5 +21,11 @@ public interface SysMenuService {
 	 * @return
 	 */
 	public List<SysMenuEntity> getUserMenuList(SysUserEntity user) throws CustomException;
+	/**
+	 * 根据用户id查询出所有权限
+	 * @param userId
+	 * @return
+	 */
+	public List<String> queryAllPermsByUserId(Integer userId) throws CustomException; 
 
 }

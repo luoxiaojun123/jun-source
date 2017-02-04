@@ -15,23 +15,36 @@
 	<mvc:annotation-driven />
 	<dubbo:annotation package="com.xiaojun" />
 	<context:component-scan base-package="com.xiaojun.controller" />
-    <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/page/"/>
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-    <bean class="com.xiaojun.exception.CustomExceptionResolver"></bean>
-	<bean name="producer" class="com.google.code.kaptcha.impl.DefaultKaptcha" scope="singleton">
-	    <property name="config">
-	        <bean class="com.google.code.kaptcha.util.Config">
-	            <constructor-arg>
-	                <props>
-	                    <prop key="kaptcha.border">no</prop>
-	                    <prop key="kaptcha.textproducer.font.color">red</prop>
-	                    <prop key="kaptcha.textproducer.char.space">5</prop>
-	                </props>
-	            </constructor-arg>
-	        </bean>
-	    </property>
+	<bean id="viewResolverJsp"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/page/" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean class="com.xiaojun.exception.CustomExceptionResolver"></bean>
+	<bean name="producer" class="com.google.code.kaptcha.impl.DefaultKaptcha"
+		scope="singleton">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.textproducer.char.space">5</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
 	</bean>
 </beans>

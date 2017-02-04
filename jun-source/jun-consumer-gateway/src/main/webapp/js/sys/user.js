@@ -52,8 +52,7 @@ var vm = new Vue({
 			if(userId == null){
 				return ;
 			}
-			
-			location.href = "user_add.html?userId="+userId;
+			location.href = "userAdd?userId="+userId;
 		},
 		query:function(event){
 			$("#jqGrid").jqGrid('setGridParam',{ 

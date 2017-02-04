@@ -30,25 +30,30 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public List<SysMenuEntity> getUserMenuList(SysUserEntity user) throws CustomException {
-		//根据用户查询目录
+		// 根据用户查询目录
 		List<SysMenuEntity> catalogList = sysUserDao.queryAllCatalogList(user.getId());
-		if (catalogList==null) {
+		if (catalogList == null) {
 			return catalogList;
 		}
 		return getAllMenuList(catalogList);
 	}
+
 	/**
 	 * 获取所有菜单列表
 	 */
 	private List<SysMenuEntity> getAllMenuList(List<SysMenuEntity> catalogList) {
-		List<SysMenuEntity> menuList=new ArrayList<>();
+		List<SysMenuEntity> menuList = new ArrayList<>();
 		for (SysMenuEntity catalog : catalogList) {
-			List<SysMenuEntity> subEntity=sysMenuDao.queryChildListByMenuId(catalog.getId());
+			List<SysMenuEntity> subEntity = sysMenuDao.queryChildListByMenuId(catalog.getId());
 			catalog.setList(subEntity);
 			menuList.add(catalog);
 		}
 		return menuList;
 	}
 
+	@Override
+	public List<String> queryAllPermsByUserId(Integer userId) {
+		return sysMenuDao.queryAllPermsByUserId(userId);
+	}
 
 }

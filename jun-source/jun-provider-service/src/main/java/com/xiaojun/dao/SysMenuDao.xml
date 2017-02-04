@@ -10,4 +10,14 @@
 		LEFT JOIN sys_menu m2 ON m1.id=m2.parentId
 		WHERE m1.id=#{menuId} AND m2.type=2
 	</select>
+	
+	<select id="queryAllPermsByUserId" resultType="String">
+		SELECT
+			sm.perms
+		FROM
+			sys_user_role sur
+		LEFT JOIN sys_role_menu srm ON sur.roleId = srm.roleId
+		LEFT JOIN sys_menu sm ON sm.id=srm.menuId
+		WHERE sur.userId=#{userId}	
+	</select>
 </mapper>
