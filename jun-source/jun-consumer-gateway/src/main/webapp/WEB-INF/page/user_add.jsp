@@ -38,7 +38,7 @@
 		   	<div class="col-sm-2 control-label">角色</div>
 		   	<div class="col-sm-10">
 			   	<label v-for="role in roleList" class="checkbox-inline">
-				  <input type="checkbox" :value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
+				  <input type="checkbox" :value="role.id" v-model="user.roleIdList">{{role.roleName}}
 				</label>
 			</div>
 		</div>

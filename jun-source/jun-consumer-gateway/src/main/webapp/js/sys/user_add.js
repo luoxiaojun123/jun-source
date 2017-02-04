@@ -22,11 +22,13 @@ var vm = new Vue({
 		getUser : function(userId) {
 			$.get("info/" + userId, function(r) {
 				vm.user = r.user;
+				console.log(vm.user.roleIdList)
 			});
 		},
 		getRoleList : function() {
 			$.get("../role/getRoleList", function(r) {
 				vm.roleList = r.list;
+				console.log(vm.roleList);
 			});
 		},
 		saveOrUpdate : function(event) {
