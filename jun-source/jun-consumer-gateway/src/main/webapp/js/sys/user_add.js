@@ -25,7 +25,7 @@ var vm = new Vue({
 			});
 		},
 		getRoleList : function() {
-			$.get("../sys/role/select", function(r) {
+			$.get("../role/getRoleList", function(r) {
 				vm.roleList = r.list;
 			});
 		},
