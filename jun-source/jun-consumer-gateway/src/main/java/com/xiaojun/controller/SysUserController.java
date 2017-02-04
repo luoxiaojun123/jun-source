@@ -1,13 +1,14 @@
 package com.xiaojun.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -52,18 +53,22 @@ public class SysUserController extends BaseController {
 		logger.info("返回用户json" + resultJson);
 		return resultJson;
 	}
-	
+
 	/**
 	 * 根据用户id查询用户信息
+	 * 
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping("getUserInfoByUserId")
+	@RequestMapping("info/{userId}")
 	@ResponseBody
-	public String getUserInfoByUserId(@RequestParam("userId") Integer userId) {
-		
-		
-		return null;
+	public Map<String, Object> info(@PathVariable Integer userId) {
+		SysUserEntity user = sysUserService.queryUser(userId);
+		List<Integer> roleIdList = sysUserService.getRoleIdsByUserId(user.getId());
+		user.setRoleIdList(roleIdList);
+		Map<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		return map;
 	}
 
 	/**
@@ -92,8 +97,10 @@ public class SysUserController extends BaseController {
 		ShiroUtils.logout();
 		return GSONUtils.toJson(result, true);
 	}
+
 	/**
 	 * 跳转用户列表
+	 * 
 	 * @param map
 	 * @return
 	 */
@@ -101,8 +108,10 @@ public class SysUserController extends BaseController {
 	public String user() {
 		return "user";
 	}
+
 	/**
 	 * 跳转 新增或者修改页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("userAdd")

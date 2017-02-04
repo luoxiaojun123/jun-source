@@ -57,7 +57,13 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public SysUserEntity getUserInfoByUserId(Integer userId) throws CustomException {
-		return sysUserDao.getUserInfoByUserId(userId);
+	public List<Integer> getRoleIdsByUserId(Integer userId) throws CustomException {
+		return sysUserDao.getRoleIdsByUserId(userId);
 	}
+
+	@Override
+	public SysUserEntity queryUser(Integer userId) throws CustomException {
+		return sysUserDao.queryObject(userId);
+	}
+
 }

@@ -20,6 +20,23 @@
 		sys_user u
 		WHERE u.username=#{username}
 	</select>
+	<select id="queryObject" resultType="com.xiaojun.entity.SysUserEntity">
+		SELECT
+		u.id,
+		u.username,
+		u.`password`,
+		u.salt,
+		u.email,
+		u.mobile,
+		u.`status`,
+		u.create_time,
+		u.create_name,
+		u.update_time,
+		u.update_name
+		FROM
+		sys_user u
+		WHERE u.id=#{userId}
+	</select>
 	<update id="updatePassword" parameterType="map">
 		update sys_user
 		set
@@ -34,7 +51,8 @@
 		FROM
 		sys_user_role ur
 		LEFT JOIN sys_role_menu rm ON ur.roleId=rm.roleId
-		LEFT JOIN sys_menu m ON rm.menuId=m.id
+		LEFT
+		JOIN sys_menu m ON rm.menuId=m.id
 		WHERE ur.userId=#{userId} AND m.type
 		= 1
 	</select>
@@ -46,9 +64,14 @@
 			AND username=#{userName}
 		</if>
 	</select>
-	
-	<!-- 查询用户所有目录 -->
-	<select id="getUserInfoByUserId" resultType="com.xiaojun.entity.SysUserEntity">
-		SELECT * FROM sys_user WHERE id=#{userId}
+	<select id="getRoleIdsByUserId" resultType="Integer">
+		SELECT
+		sr.id
+		FROM
+		sys_role sr
+		LEFT JOIN sys_user_role sur ON sur.roleId = sr.id
+		LEFT JOIN sys_user
+		su ON sur.userId=su.id
+		WHERE su.id=#{userId}
 	</select>
 </mapper>
