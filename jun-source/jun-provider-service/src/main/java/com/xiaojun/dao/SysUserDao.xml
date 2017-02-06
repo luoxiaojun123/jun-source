@@ -35,7 +35,8 @@
 		u.update_name
 		FROM
 		sys_user u
-		WHERE u.id=#{userId}
+		WHERE
+		u.id=#{userId}
 	</select>
 	<update id="updatePassword" parameterType="map">
 		update sys_user
@@ -70,8 +71,36 @@
 		FROM
 		sys_role sr
 		LEFT JOIN sys_user_role sur ON sur.roleId = sr.id
-		LEFT JOIN sys_user
+		LEFT JOIN
+		sys_user
 		su ON sur.userId=su.id
 		WHERE su.id=#{userId}
 	</select>
+	<insert id="save" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.xiaojun.entity.SysUserEntity">
+		INSERT
+		sys_user(username,password,email,mobile,status,create_time)
+		VALUES(#{username},#{password},#{email},#{mobile},#{status},SYSDATE())
+	</insert>
+	<insert id="saveUserRole">
+		INSERT sys_user_role(userId,roleId) VALUES
+		<foreach collection="roleIdList" item="roleId" separator=",">
+			(#{userId},#{roleId})
+		</foreach>
+	</insert>
+	<delete id="delete">
+		delete from sys_user_role where userId = #{userId}
+	</delete>
+	
+	<update id="update" parameterType="com.xiaojun.entity.SysUserEntity">
+		update sys_user 
+		<set> 
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+		</set>
+		where id = #{id}
+	</update>
 </mapper>

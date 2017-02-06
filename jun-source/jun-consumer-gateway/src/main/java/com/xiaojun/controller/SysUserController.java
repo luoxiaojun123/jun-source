@@ -8,6 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -119,6 +120,12 @@ public class SysUserController extends BaseController {
 		return "user_add";
 	}
 
+	/**
+	 * 获取用户列表
+	 * 
+	 * @param dto
+	 * @return
+	 */
 	@RequestMapping("getUserList")
 	@ResponseBody
 	@RequiresPermissions("sys:user:list")
@@ -127,6 +134,21 @@ public class SysUserController extends BaseController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("pageInfo", pageInfo);
 		return map;
+	}
+
+	/**
+	 * 保存用户相关
+	 * 
+	 * @param userRoleDTO
+	 * @return
+	 */
+	@RequestMapping("save")
+	@ResponseBody
+	public String save(@RequestBody SysUserEntity user) {
+		Result<String> result = new Result<>();
+		user.setPassword(PasswordHelper.encryptPassword(user.getPassword()));
+		sysUserService.save(user);
+		return GSONUtils.toJson(result, true);
 	}
 
 }

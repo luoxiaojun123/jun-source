@@ -19,8 +19,9 @@
 		<div class="form-group">
 		   	<div class="col-sm-2 control-label">密码</div>
 		   	<div class="col-sm-10">
-		      <input type="text" class="form-control" v-model="user.password" placeholder="密码"/>
-		    </div>
+					<input type="password" class="form-control" v-model="user.password"
+						placeholder="密码" />
+				</div>
 		</div>
 		<div class="form-group">
 		   	<div class="col-sm-2 control-label">邮箱</div>

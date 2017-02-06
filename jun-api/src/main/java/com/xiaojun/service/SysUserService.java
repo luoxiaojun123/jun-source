@@ -41,8 +41,10 @@ public interface SysUserService {
 	 * @throws CustomException
 	 */
 	public PageInfo<SysUserEntity> queryList(UserDTO dto) throws CustomException;
+
 	/**
 	 * 根据用户id获取角色id集合
+	 * 
 	 * @param userId
 	 * @return
 	 * @throws CustomException
@@ -51,9 +53,31 @@ public interface SysUserService {
 
 	/**
 	 * 根据用户id获取用户信息
+	 * 
 	 * @param userId
 	 * @return
 	 * @throws CustomException
 	 */
 	public SysUserEntity queryUser(Integer userId) throws CustomException;
+
+	/**
+	 * 保存
+	 * @param user
+	 * @return
+	 * @throws CustomException
+	 */
+	public Integer save(SysUserEntity user) throws CustomException;
+	
+	/**
+	 * 更新
+	 * @param user
+	 * @return
+	 * @throws CustomException
+	 */
+	public Integer update(SysUserEntity user) throws CustomException;
+	/**
+	 * 保存用户角色关联
+	 * @throws CustomException
+	 */
+	public void saveUserRole(Map<String, Object> map) throws CustomException;
 }

@@ -32,14 +32,14 @@ var vm = new Vue({
 			});
 		},
 		saveOrUpdate : function(event) {
-			var url = vm.user.userId == null ? "../sys/user/save"
-					: "../sys/user/update";
+			var url = vm.user.userId == null ? "save"
+					: "update";
 			$.ajax({
 				type : "POST",
 				url : url,
 				data : JSON.stringify(vm.user),
 				success : function(r) {
-					if (r.code === 0) {
+					if (r.resCode =='200') {
 						alert('操作成功', function(index) {
 							vm.back();
 						});

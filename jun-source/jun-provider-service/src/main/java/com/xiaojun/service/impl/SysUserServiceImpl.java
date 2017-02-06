@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
@@ -64,6 +66,40 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public SysUserEntity queryUser(Integer userId) throws CustomException {
 		return sysUserDao.queryObject(userId);
+	}
+
+	@Override
+	@Transactional
+	public Integer save(SysUserEntity user) throws CustomException {
+		sysUserDao.save(user);
+		Integer userId = user.getId();
+		// 删除用户角色关系
+		sysUserDao.delete(userId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("roleIdList", user.getRoleIdList());
+		// 插入用户角色关系
+		sysUserDao.saveUserRole(map);
+		return userId;
+	}
+
+	@Override
+	public Integer update(SysUserEntity user) throws CustomException {
+		sysUserDao.update(user);
+		Integer userId = user.getId();
+		// 删除用户角色关系
+		sysUserDao.delete(userId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("roleIdList", user.getRoleIdList());
+		// 插入用户角色关系
+		sysUserDao.saveUserRole(map);
+		return userId;
+	}
+	
+	@Override
+	public void saveUserRole(Map<String, Object> map) throws CustomException {
+		sysUserDao.saveUserRole(map);
 	}
 
 }
