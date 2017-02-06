@@ -23,6 +23,10 @@ public class SysMenuEntity implements Serializable{
 	 */
 	private Integer parentId;
 	/**
+	 * 父菜单名称
+	 */
+	private String parentName;
+	/**
 	 * 菜单名称
 	 */
 	private String name;
@@ -58,6 +62,11 @@ public class SysMenuEntity implements Serializable{
 	 * 子节点
 	 */
 	private List<?> list;
+	
+	/**
+	 * ztree属性
+	 */
+	private Boolean open;
 
 	public Integer getId() {
 		return id;
@@ -162,6 +171,22 @@ public class SysMenuEntity implements Serializable{
 
 	public void setList(List<?> list) {
 		this.list = list;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public Boolean getOpen() {
+		return open;
+	}
+
+	public void setOpen(Boolean open) {
+		this.open = open;
 	}
 	
 }

@@ -28,4 +28,12 @@ public interface SysMenuDao extends BeseDao<SysMenuEntity> {
 	 * @throws CustomException
 	 */
 	public List<String> queryAllPermsByUserId(@Param("userId") Integer userId) throws CustomException;
+	/**
+	 * 获取没有按钮的目录和菜单
+	 * @return
+	 * @throws CustomException
+	 */
+	public List<SysMenuEntity> queryNotButtonList() throws CustomException;
+	
+	
 }

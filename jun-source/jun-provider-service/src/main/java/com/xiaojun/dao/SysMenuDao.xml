@@ -20,4 +20,19 @@
 		LEFT JOIN sys_menu sm ON sm.id=srm.menuId
 		WHERE sur.userId=#{userId}	
 	</select>
+	
+	<select id="queryList" resultType="com.xiaojun.entity.SysMenuEntity">
+		SELECT
+			sm.*,
+			sm2.`name` AS parentName
+		FROM
+			sys_menu sm
+		LEFT JOIN sys_menu sm2 ON sm.parentId=sm2.id WHERE 1=1
+		<if test="name!=null and name!=''">
+			AND sm.name=#{name}
+		</if>
+	</select>
+	<select id="queryNotButtonList" resultType="com.xiaojun.entity.SysMenuEntity">
+		select * from sys_menu where type != 3 order by order_num asc 
+	</select>
 </mapper>

@@ -1,9 +1,9 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '../sys/menu/list',
+        url: 'getAllMenuList',
         datatype: "json",
         colModel: [			
-			{ label: '菜单ID', name: 'menuId', width: 40, key: true },
+			{ label: '菜单ID', name: 'id', width: 40, key: true,hidden:true },
 			{ label: '菜单名称', name: 'name', width: 60 },
 			{ label: '上级菜单', name: 'parentName', width: 60 },
 			{ label: '菜单图标', name: 'icon', width: 50, formatter: function(value, options, row){
@@ -12,17 +12,17 @@ $(function () {
 			{ label: '菜单URL', name: 'url', width: 100 },
 			{ label: '授权标识', name: 'perms', width: 100 },
 			{ label: '类型', name: 'type', width: 50, formatter: function(value, options, row){
-				if(value === 0){
+				if(value == 1){
 					return '<span class="label label-primary">目录</span>';
 				}
-				if(value === 1){
+				if(value == 2){
 					return '<span class="label label-success">菜单</span>';
 				}
-				if(value === 2){
+				if(value == 3){
 					return '<span class="label label-warning">按钮</span>';
 				}
 			}},
-			{ label: '排序号', name: 'orderNum', width: 50}                   
+			{ label: '排序号', name: 'order_num', width: 50}                   
         ],
 		viewrecords: true,
         height: 400,
@@ -34,14 +34,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "pageInfo.list",
+            page: "pageInfo.pageNum",
+            total: "pageInfo.pages",
+            records: "pageInfo.total"
         },
         prmNames : {
             page:"page", 
-            rows:"limit", 
+            rows:"rows", 
             order: "order"
         },
         gridComplete:function(){
@@ -54,7 +54,7 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		
+		name:null
 	},
 	methods: {
 		update: function (event) {
@@ -62,8 +62,13 @@ var vm = new Vue({
 			if(menuId == null){
 				return ;
 			}
-			
-			location.href = "menu_add.html?menuId="+menuId;
+			location.href = "menuAdd?menuId="+menuId;
+		},
+		query:function(event){
+			$("#jqGrid").jqGrid('setGridParam',{ 
+                postData:{'name': vm.name},
+                page:1 
+            }).trigger("reloadGrid");
 		},
 		del: function (event) {
 			var menuIds = getSelectedRows();
@@ -74,15 +79,15 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/menu/delete",
+				    url: "delete",
 				    data: JSON.stringify(menuIds),
 				    success: function(r){
-				    	if(r.code === 0){
+				    	if(r.resCode == '200'){
 							alert('操作成功', function(index){
 								$("#jqGrid").trigger("reloadGrid");
 							});
 						}else{
-							alert(r.msg);
+							alert(r.resMsg);
 						}
 					}
 				});

@@ -2,6 +2,8 @@ package com.xiaojun.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+import com.xiaojun.dto.MenuDTO;
 import com.xiaojun.entity.SysMenuEntity;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
@@ -27,5 +29,18 @@ public interface SysMenuService {
 	 * @return
 	 */
 	public List<String> queryAllPermsByUserId(Integer userId) throws CustomException; 
+	/**
+	 * 获取菜单列表
+	 * @param menuDTO
+	 * @return
+	 * @throws CustomException
+	 */
+	public PageInfo<SysMenuEntity> queryList(MenuDTO dto) throws CustomException;
+	/**
+	 * 获取没有按钮的目录和菜单
+	 * @return
+	 * @throws CustomException
+	 */
+	public List<SysMenuEntity> queryNotButtonList() throws CustomException;
 
 }

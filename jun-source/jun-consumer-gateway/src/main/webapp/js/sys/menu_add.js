@@ -22,7 +22,7 @@ var vm = new Vue({
 		menu:{
 			parentName:"",
 			parentId:0,
-			type:1,
+			type:2,
 			orderNum:0
 		}
 	},
@@ -33,11 +33,10 @@ var vm = new Vue({
 		}
 		
 		//加载菜单树
-		$.get("../sys/menu/select", function(r){
+		$.get("select", function(r){
 			ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
-			var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
+			var node = ztree.getNodeByParam("id", vm.menu.parentId);
 			ztree.selectNode(node);
-			
 			vm.menu.parentName = node.name;
 		})
     },

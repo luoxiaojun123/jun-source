@@ -1,13 +1,18 @@
 package com.xiaojun.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xiaojun.dao.SysMenuDao;
 import com.xiaojun.dao.SysUserDao;
+import com.xiaojun.dto.MenuDTO;
 import com.xiaojun.entity.SysMenuEntity;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
@@ -54,6 +59,30 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public List<String> queryAllPermsByUserId(Integer userId) {
 		return sysMenuDao.queryAllPermsByUserId(userId);
+	}
+
+	@Override
+	public PageInfo<SysMenuEntity> queryList(MenuDTO dto) throws CustomException {
+		PageHelper.startPage(dto.getPage(), dto.getRows());
+		PageHelper.orderBy("id desc");
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", dto.getName());
+		List<SysMenuEntity> list = sysMenuDao.queryList(map);
+		PageInfo<SysMenuEntity> pageInfo = new PageInfo<>(list);
+		return pageInfo;
+	}
+
+	@Override
+	public List<SysMenuEntity> queryNotButtonList() throws CustomException {
+		List<SysMenuEntity> list = sysMenuDao.queryNotButtonList();
+		// 添加顶级菜单
+		SysMenuEntity root = new SysMenuEntity();
+		root.setId(0);
+		root.setName("一级菜单");
+		root.setParentId(-1);
+		root.setOpen(true);
+		list.add(root);
+		return list;
 	}
 
 }
