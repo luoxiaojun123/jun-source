@@ -25,7 +25,7 @@ public interface BeseDao<T> {
 	
 	int delete(Map<String, Object> map);
 	
-	int deleteBatch(Object[] id);
+	int deleteBatch(Object[] ids);
 	
 	T queryObject(Object id);
 	

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -148,6 +149,43 @@ public class SysUserController extends BaseController {
 		Result<String> result = new Result<>();
 		user.setPassword(PasswordHelper.encryptPassword(user.getPassword()));
 		sysUserService.save(user);
+		return GSONUtils.toJson(result, true);
+	}
+
+	/**
+	 * 保存用户相关
+	 * 
+	 * @param userRoleDTO
+	 * @return
+	 */
+	@RequestMapping("update")
+	@ResponseBody
+	public String update(@RequestBody SysUserEntity user) {
+		Result<String> result = new Result<>();
+		user.setPassword(PasswordHelper.encryptPassword(user.getPassword()));
+		sysUserService.update(user);
+		return GSONUtils.toJson(result, true);
+	}
+
+	/**
+	 * 保存用户相关
+	 * 
+	 * @param userRoleDTO
+	 * @return
+	 */
+	@RequestMapping("delete")
+	@ResponseBody
+	public String delete(@RequestBody Integer[] ids) {
+		Result<String> result = new Result<>();
+		if (ArrayUtils.contains(ids, 1)) {
+			result.error("系统管理员不能删除");
+			return GSONUtils.toJson(result, true);
+		}
+		if (ArrayUtils.contains(ids, ShiroUtils.getId())) {
+			result.error("当前用户不能删除");
+			return GSONUtils.toJson(result, true);
+		}
+		sysUserService.deleteBatch(ids);
 		return GSONUtils.toJson(result, true);
 	}
 

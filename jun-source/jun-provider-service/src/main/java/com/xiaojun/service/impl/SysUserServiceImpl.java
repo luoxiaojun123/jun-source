@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,10 +95,15 @@ public class SysUserServiceImpl implements SysUserService {
 		sysUserDao.saveUserRole(map);
 		return userId;
 	}
-	
+
 	@Override
 	public void saveUserRole(Map<String, Object> map) throws CustomException {
 		sysUserDao.saveUserRole(map);
+	}
+
+	@Override
+	public Integer deleteBatch(Integer[] ids) throws CustomException {
+		return sysUserDao.deleteBatch(ids);
 	}
 
 }

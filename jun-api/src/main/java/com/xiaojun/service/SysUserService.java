@@ -80,4 +80,11 @@ public interface SysUserService {
 	 * @throws CustomException
 	 */
 	public void saveUserRole(Map<String, Object> map) throws CustomException;
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 * @throws CustomException
+	 */
+	public Integer deleteBatch(Integer[] ids) throws CustomException;
 }
