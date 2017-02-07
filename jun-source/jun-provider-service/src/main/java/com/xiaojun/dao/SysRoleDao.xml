@@ -1,8 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.xiaojun.dao.SysRoleDao">
 	<select id="queryList" resultType="com.xiaojun.entity.SysRoleEntity">
-		select * from sys_role where 1=1 
+		select * from sys_role where 1=1
+		<if test="roleName!=null and roleName!=''">
+			AND roleName=#{roleName}
+		</if>
 	</select>
+	<select id="queryObject" resultType="com.xiaojun.entity.SysRoleEntity">
+		select * from sys_role where
+		id=#{id}
+	</select>
+	<select id="queryMenuByRoleId" resultType="Integer">
+		SELECT
+		menuId FROM
+		sys_role_menu WHERE roleId=#{id}
+	</select>
+	<insert id="save" useGeneratedKeys="true"
+		parameterType="com.xiaojun.entity.SysRoleEntity" keyProperty="id">
+		INSERT
+		sys_role (roleName,remark,create_time)
+		VALUES(#{roleName},#{remark},SYSDATE())
+	</insert>
+	<insert id="saveRoleMenu">
+		INSERT sys_role_menu(roleId,menuId) VALUES
+		<foreach collection="menuIdList" item="menuId" separator=",">
+			(#{roleId},#{menuId})
+		</foreach>
+	</insert>
+	<delete id="delete">
+		delete from sys_role_menu where roleId = #{roleId}
+	</delete>
+	<update id="update" parameterType="com.xiaojun.entity.SysUserEntity">
+		update sys_role
+		<set>
+			<if test="roleName != null and roleName!=''">`roleName` = #{roleName}, </if>
+			<if test="remark != null and remark!=''">`remark` = #{remark}, </if>
+			update_name=SYSDATE()
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="deleteBatch">
+		delete from sys_role where id in
+		<foreach collection="array" item="roleId" open="(" separator=","
+			close=")">
+			#{roleId}
+		</foreach>
+		;
+		delete from sys_role_menu where roleId in
+		<foreach collection="array" item="roleId" open="(" separator=","
+			close=")">
+			#{roleId}
+		</foreach>
+	</delete>
 </mapper>

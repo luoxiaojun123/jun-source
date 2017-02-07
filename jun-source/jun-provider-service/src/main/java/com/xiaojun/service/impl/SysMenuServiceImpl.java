@@ -105,4 +105,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		sysMenuDao.update(menu);
 	}
 
+	@Override
+	public List<SysMenuEntity> perms() throws CustomException {
+		return sysMenuDao.queryALlPermsList();
+	}
+
 }

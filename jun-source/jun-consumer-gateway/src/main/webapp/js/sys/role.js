@@ -1,9 +1,9 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '../sys/role/list',
+        url: 'getPageRoleList',
         datatype: "json",
         colModel: [			
-			{ label: '角色ID', name: 'roleId', width: 45, key: true },
+			{ label: '角色ID', name: 'id', width: 45, key: true,hidden:true },
 			{ label: '角色名称', name: 'roleName', width: 75 },
 			{ label: '备注', name: 'remark', width: 100 },
 			{ label: '创建时间', name: 'createTime', width: 80}                   
@@ -18,14 +18,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "pageInfo.list",
+            page: "pageInfo.pageNum",
+            total: "pageInfo.pages",
+            records: "pageInfo.total"
         },
         prmNames : {
             page:"page", 
-            rows:"limit", 
+            rows:"rows", 
             order: "order"
         },
         gridComplete:function(){
@@ -38,7 +38,7 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		
+		roleName:null
 	},
 	methods: {
 		update: function (event) {
@@ -46,27 +46,31 @@ var vm = new Vue({
 			if(roleId == null){
 				return ;
 			}
-			
-			location.href = "role_add.html?roleId="+roleId;
+			location.href = "roleAdd?roleId="+roleId;
+		},
+		query:function(event){
+			$("#jqGrid").jqGrid('setGridParam',{ 
+                postData:{'roleName': vm.roleName},
+                page:1 
+            }).trigger("reloadGrid");
 		},
 		del: function (event) {
 			var roleIds = getSelectedRows();
 			if(roleIds == null){
 				return ;
 			}
-			
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/role/delete",
+				    url: "delete",
 				    data: JSON.stringify(roleIds),
 				    success: function(r){
-						if(r.code == 0){
+				    	if(r.resCode == '200'){
 							alert('操作成功', function(index){
 								$("#jqGrid").trigger("reloadGrid");
 							});
 						}else{
-							alert(r.msg);
+							alert(r.resMsg);
 						}
 					}
 				});

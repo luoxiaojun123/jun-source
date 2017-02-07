@@ -87,7 +87,7 @@ public class SysMenuController extends BaseController {
 	 */
 	@RequestMapping("select")
 	@ResponseBody
-	public Map<String, Object> select(MenuDTO dto) {
+	public Map<String, Object> select() {
 		Map<String, Object> map = new HashMap<>();
 		List<SysMenuEntity> menuList = sysMenuService.queryNotButtonList();
 		map.put("menuList", menuList);
@@ -149,5 +149,14 @@ public class SysMenuController extends BaseController {
 		Result<String> result = new Result<>();
 		sysMenuService.update(menu);
 		return GSONUtils.toJson(result, true);
+	}
+
+	@RequestMapping("perms")
+	@ResponseBody
+	public Map<String, Object> perms() {
+		Map<String, Object> map = new HashMap<>();
+		List<SysMenuEntity> menuList = sysMenuService.perms();
+		map.put("menuList", menuList);
+		return map;
 	}
 }

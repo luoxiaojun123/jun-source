@@ -42,6 +42,9 @@
 		select * from
 		sys_menu where type != 3 order by order_num asc
 	</select>
+	<select id="queryALlPermsList" resultType="com.xiaojun.entity.SysMenuEntity">
+		select * from sys_menu
+	</select>
 	<select id="queryObject" resultType="com.xiaojun.entity.SysMenuEntity">
 		SELECT
 		sm.*,

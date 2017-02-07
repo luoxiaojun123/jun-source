@@ -34,6 +34,12 @@ public interface SysMenuDao extends BeseDao<SysMenuEntity> {
 	 * @throws CustomException
 	 */
 	public List<SysMenuEntity> queryNotButtonList() throws CustomException;
+	/**
+	 * 获取所有权限
+	 * @return
+	 * @throws CustomException
+	 */
+	public List<SysMenuEntity> queryALlPermsList() throws CustomException;
 	
 	
 }

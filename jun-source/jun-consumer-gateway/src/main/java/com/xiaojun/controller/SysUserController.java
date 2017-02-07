@@ -107,7 +107,7 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("list")
-	public String user() {
+	public String list() {
 		return "user";
 	}
 

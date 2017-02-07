@@ -69,5 +69,11 @@ public interface SysMenuService {
 	 * @throws CustomException
 	 */
 	public void update(SysMenuEntity menu) throws CustomException;
+	/**
+	 * 权限查询
+	 * @return
+	 * @throws CustomException
+	 */
+	public List<SysMenuEntity> perms() throws CustomException;
 
 }

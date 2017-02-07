@@ -1,11 +1,14 @@
 package com.xiaojun.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 /**
  * 角色实体
+ * 
  * @author xiaojun
- * @email  lxjluoxiaojun@163.com
- * @date   2017年2月4日
+ * @email lxjluoxiaojun@163.com
+ * @date 2017年2月4日
  */
 public class SysRoleEntity implements Serializable {
 
@@ -41,6 +44,18 @@ public class SysRoleEntity implements Serializable {
 	 * 更新时间
 	 */
 	private String update_time;
+	/**
+	 * 包含菜单
+	 */
+	private List<Integer> menuIdList;
+
+	public List<Integer> getMenuIdList() {
+		return menuIdList;
+	}
+
+	public void setMenuIdList(List<Integer> menuIdList) {
+		this.menuIdList = menuIdList;
+	}
 
 	public Integer getId() {
 		return id;
