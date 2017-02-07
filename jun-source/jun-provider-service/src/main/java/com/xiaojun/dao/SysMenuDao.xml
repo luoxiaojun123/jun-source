@@ -60,4 +60,11 @@
 			#{menuId}
 		</foreach>
 	</delete>
+
+	<insert id="save" useGeneratedKeys="true"
+		parameterType="com.xiaojun.entity.SysMenuEntity" keyProperty="id">
+		INSERT
+		sys_menu(parentId,name,url,perms,type,icon,order_num)
+		VALUES(#{parentId},#{name},#{url},#{perms},#{type},#{icon},#{order_num})
+	</insert>
 </mapper>

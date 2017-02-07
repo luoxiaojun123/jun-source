@@ -34,7 +34,7 @@
 		       <input type="text" class="form-control" style="cursor:pointer;" v-model="menu.parentName" @click="menuTree" readonly="readonly" placeholder="一级菜单"/>
 		    </div>
 		</div>
-		<div v-if="menu.type == 1" class="form-group">
+		<div v-if="menu.type == 2" class="form-group">
 		   	<div class="col-sm-2 control-label">菜单URL</div>
 		   	<div class="col-sm-10">
 		      <input type="text" class="form-control" v-model="menu.url" placeholder="菜单URL"/>

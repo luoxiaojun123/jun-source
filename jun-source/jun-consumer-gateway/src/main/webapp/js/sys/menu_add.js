@@ -53,12 +53,12 @@ var vm = new Vue({
 			    url: url,
 			    data: JSON.stringify(vm.menu),
 			    success: function(r){
-			    	if(r.code === 0){
+			    	if(r.resCode == '200'){
 						alert('操作成功', function(index){
 							vm.back();
 						});
 					}else{
-						alert(r.msg);
+						alert(r.resMsg);
 					}
 				}
 			});

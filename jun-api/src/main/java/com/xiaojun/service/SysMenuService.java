@@ -56,5 +56,12 @@ public interface SysMenuService {
 	 * @throws CustomException
 	 */
 	public Integer deleteBatch(Integer[] menuIds) throws CustomException;
+	/**
+	 * 保存
+	 * @param menu
+	 * @return
+	 * @throws CustomException
+	 */
+	public Integer save(SysMenuEntity menu) throws CustomException;
 
 }

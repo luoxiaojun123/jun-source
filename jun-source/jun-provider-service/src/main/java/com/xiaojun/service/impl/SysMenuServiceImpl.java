@@ -95,4 +95,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return sysMenuDao.deleteBatch(menuIds);
 	}
 
+	@Override
+	public Integer save(SysMenuEntity menu) throws CustomException {
+		return sysMenuDao.save(menu);
+	}
+
 }

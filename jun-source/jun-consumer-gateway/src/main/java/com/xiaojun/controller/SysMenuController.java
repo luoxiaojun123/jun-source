@@ -80,7 +80,7 @@ public class SysMenuController extends BaseController {
 	}
 
 	/**
-	 * 获取菜单列表
+	 * 获取菜单列表 不包含按钮
 	 * 
 	 * @param dto
 	 * @return
@@ -131,9 +131,9 @@ public class SysMenuController extends BaseController {
 	 */
 	@RequestMapping("save")
 	@ResponseBody
-	public String save(@RequestBody Integer[] menuIds) {
+	public String save(@RequestBody SysMenuEntity menu) {
 		Result<String> result = new Result<>();
-		sysMenuService.deleteBatch(menuIds);
+		sysMenuService.save(menu);
 		return GSONUtils.toJson(result, true);
 	}
 }
