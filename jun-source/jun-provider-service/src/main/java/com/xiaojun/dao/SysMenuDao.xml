@@ -67,4 +67,18 @@
 		sys_menu(parentId,name,url,perms,type,icon,order_num)
 		VALUES(#{parentId},#{name},#{url},#{perms},#{type},#{icon},#{order_num})
 	</insert>
+
+	<update id="update" parameterType="com.xiaojun.entity.SysMenuEntity">
+		UPDATE sys_menu
+		<set>
+			<if test="parentId !=null and parentId !=''">parentId=#{parentId},</if>
+			<if test="name !=null and name !=''">name=#{name},</if>
+			<if test="url !=null and url !=''">url=#{url},</if>
+			<if test="perms !=null and perms !=''">perms=#{perms},</if>
+			<if test="type !=null and type !=''">type=#{type},</if>
+			<if test="icon !=null and icon !=''">icon=#{icon},</if>
+			<if test="order_num !=null and order_num !=''">order_num=#{order_num}</if>
+		</set>
+		WHERE id=#{id}
+	</update>
 </mapper>

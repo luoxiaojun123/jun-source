@@ -47,7 +47,7 @@ var vm = new Vue({
             });
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.menu.menuId == null ? "save" : "update";
+			var url = vm.menu.id == null ? "save" : "update";
 			$.ajax({
 				type: "POST",
 			    url: url,

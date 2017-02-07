@@ -63,5 +63,11 @@ public interface SysMenuService {
 	 * @throws CustomException
 	 */
 	public Integer save(SysMenuEntity menu) throws CustomException;
+	/**
+	 * 更新
+	 * @param menu
+	 * @throws CustomException
+	 */
+	public void update(SysMenuEntity menu) throws CustomException;
 
 }

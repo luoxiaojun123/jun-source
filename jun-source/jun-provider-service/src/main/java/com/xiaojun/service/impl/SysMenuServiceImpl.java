@@ -100,4 +100,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return sysMenuDao.save(menu);
 	}
 
+	@Override
+	public void update(SysMenuEntity menu) throws CustomException {
+		sysMenuDao.update(menu);
+	}
+
 }

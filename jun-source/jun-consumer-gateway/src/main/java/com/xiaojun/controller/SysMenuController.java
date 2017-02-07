@@ -136,4 +136,18 @@ public class SysMenuController extends BaseController {
 		sysMenuService.save(menu);
 		return GSONUtils.toJson(result, true);
 	}
+
+	/**
+	 * 获取菜单列表
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("update")
+	@ResponseBody
+	public String update(@RequestBody SysMenuEntity menu) {
+		Result<String> result = new Result<>();
+		sysMenuService.update(menu);
+		return GSONUtils.toJson(result, true);
+	}
 }
