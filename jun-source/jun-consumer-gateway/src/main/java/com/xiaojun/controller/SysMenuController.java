@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -90,5 +92,48 @@ public class SysMenuController extends BaseController {
 		List<SysMenuEntity> menuList = sysMenuService.queryNotButtonList();
 		map.put("menuList", menuList);
 		return map;
+	}
+
+	/**
+	 * 获取菜单列表
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("info/{menuId}")
+	@ResponseBody
+	public Map<String, Object> info(@PathVariable("menuId") Integer menuId) {
+		Map<String, Object> map = new HashMap<>();
+		SysMenuEntity menu = sysMenuService.queryObject(menuId);
+		map.put("menu", menu);
+		return map;
+	}
+
+	/**
+	 * 获取菜单列表
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("delete")
+	@ResponseBody
+	public String delete(@RequestBody Integer[] menuIds) {
+		Result<String> result = new Result<>();
+		sysMenuService.deleteBatch(menuIds);
+		return GSONUtils.toJson(result, true);
+	}
+
+	/**
+	 * 获取菜单列表
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("save")
+	@ResponseBody
+	public String save(@RequestBody Integer[] menuIds) {
+		Result<String> result = new Result<>();
+		sysMenuService.deleteBatch(menuIds);
+		return GSONUtils.toJson(result, true);
 	}
 }

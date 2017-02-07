@@ -2,7 +2,7 @@ var setting = {
 	data: {
 		simpleData: {
 			enable: true,
-			idKey: "menuId",
+			idKey: "id",
 			pIdKey: "parentId",
 			rootPId: -1
 		},
@@ -42,12 +42,12 @@ var vm = new Vue({
     },
 	methods: {
 		getMenu: function(menuId){
-			$.get("../sys/menu/info/"+menuId, function(r){
+			$.get("info/"+menuId, function(r){
                 vm.menu = r.menu;
             });
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.menu.menuId == null ? "../sys/menu/save" : "../sys/menu/update";
+			var url = vm.menu.menuId == null ? "save" : "update";
 			$.ajax({
 				type: "POST",
 			    url: url,
@@ -77,7 +77,7 @@ var vm = new Vue({
 				btn1: function (index) {
 					var node = ztree.getSelectedNodes();
 					//选择上级菜单
-					vm.menu.parentId = node[0].menuId;
+					vm.menu.parentId = node[0].id;
 					vm.menu.parentName = node[0].name;
 					
 					layer.close(index);

@@ -15,7 +15,7 @@
 	</div>
 	<div class="grid-btn">
 		<button type="button"  class="btn btn-default" @click="query">查询</button>
-		<a class="btn btn-default" href="menu_add.html">新增</a>
+		<a class="btn btn-default" href="menuAdd">新增</a>
 		<button type="button"  class="btn btn-default" @click="update">修改</button>
 		<button type="button" class="btn btn-default" @click="del">删除</button>
 	</div>

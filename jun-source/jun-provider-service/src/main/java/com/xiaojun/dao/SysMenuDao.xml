@@ -4,35 +4,60 @@
 <mapper namespace="com.xiaojun.dao.SysMenuDao">
 	<select id="queryChildListByMenuId" resultType="com.xiaojun.entity.SysMenuEntity">
 		SELECT
-			m2.*
+		m2.*
 		FROM
-			sys_menu m1
+		sys_menu m1
 		LEFT JOIN sys_menu m2 ON m1.id=m2.parentId
-		WHERE m1.id=#{menuId} AND m2.type=2
+		WHERE
+		m1.id=#{menuId} AND
+		m2.type=2
 	</select>
-	
+
 	<select id="queryAllPermsByUserId" resultType="String">
 		SELECT
-			sm.perms
+		sm.perms
 		FROM
-			sys_user_role sur
-		LEFT JOIN sys_role_menu srm ON sur.roleId = srm.roleId
-		LEFT JOIN sys_menu sm ON sm.id=srm.menuId
-		WHERE sur.userId=#{userId}	
+		sys_user_role sur
+		LEFT JOIN sys_role_menu srm ON sur.roleId =
+		srm.roleId
+		LEFT JOIN
+		sys_menu sm ON sm.id=srm.menuId
+		WHERE
+		sur.userId=#{userId}
 	</select>
-	
+
 	<select id="queryList" resultType="com.xiaojun.entity.SysMenuEntity">
 		SELECT
-			sm.*,
-			sm2.`name` AS parentName
+		sm.*,
+		sm2.`name` AS parentName
 		FROM
-			sys_menu sm
-		LEFT JOIN sys_menu sm2 ON sm.parentId=sm2.id WHERE 1=1
+		sys_menu sm
+		LEFT JOIN sys_menu
+		sm2 ON sm.parentId=sm2.id WHERE 1=1
 		<if test="name!=null and name!=''">
 			AND sm.name=#{name}
 		</if>
 	</select>
 	<select id="queryNotButtonList" resultType="com.xiaojun.entity.SysMenuEntity">
-		select * from sys_menu where type != 3 order by order_num asc 
+		select * from
+		sys_menu where type != 3 order by order_num asc
 	</select>
+	<select id="queryObject" resultType="com.xiaojun.entity.SysMenuEntity">
+		SELECT
+		sm.*,
+		sm2.`name` AS
+		parentName
+		FROM
+		sys_menu sm
+		LEFT JOIN sys_menu sm2 ON sm.parentId=sm2.id
+		WHERE sm.id=#{id}
+	</select>
+
+	<delete id="deleteBatch">
+		DELETE FROM sys_menu WHERE id in
+		<foreach collection="array" item="menuId" open="(" separator=","
+			close=")">
+			#{menuId}
+		</foreach>
+	</delete>
 </mapper>

@@ -42,5 +42,19 @@ public interface SysMenuService {
 	 * @throws CustomException
 	 */
 	public List<SysMenuEntity> queryNotButtonList() throws CustomException;
+	/**
+	 * 根据id查询实体
+	 * @param id
+	 * @return
+	 * @throws CustomException
+	 */
+	public SysMenuEntity queryObject(Integer id) throws CustomException;
+	/**
+	 * 批量删除菜单
+	 * @param menuIds
+	 * @return
+	 * @throws CustomException
+	 */
+	public Integer deleteBatch(Integer[] menuIds) throws CustomException;
 
 }

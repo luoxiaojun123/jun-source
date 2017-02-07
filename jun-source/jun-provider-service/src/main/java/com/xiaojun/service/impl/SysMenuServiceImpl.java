@@ -85,4 +85,14 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return list;
 	}
 
+	@Override
+	public SysMenuEntity queryObject(Integer id) throws CustomException {
+		return sysMenuDao.queryObject(id);
+	}
+
+	@Override
+	public Integer deleteBatch(Integer[] menuIds) throws CustomException {
+		return sysMenuDao.deleteBatch(menuIds);
+	}
+
 }
