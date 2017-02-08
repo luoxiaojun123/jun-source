@@ -138,9 +138,9 @@ public class SysUserController extends BaseController {
 	}
 
 	/**
-	 * 保存用户相关
+	 * 保存用户
 	 * 
-	 * @param userRoleDTO
+	 * @param SysUserEntity
 	 * @return
 	 */
 	@RequestMapping("save")
@@ -153,7 +153,7 @@ public class SysUserController extends BaseController {
 	}
 
 	/**
-	 * 保存用户相关
+	 * 更新用户
 	 * 
 	 * @param userRoleDTO
 	 * @return
@@ -168,7 +168,7 @@ public class SysUserController extends BaseController {
 	}
 
 	/**
-	 * 保存用户相关
+	 * 删除用户
 	 * 
 	 * @param userRoleDTO
 	 * @return

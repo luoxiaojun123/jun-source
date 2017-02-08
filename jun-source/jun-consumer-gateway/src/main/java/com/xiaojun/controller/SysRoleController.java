@@ -57,7 +57,7 @@ public class SysRoleController extends BaseController {
 	}
 
 	/**
-	 * 跳转角色列表
+	 * 新增或者修改页面跳转
 	 * 
 	 * @return
 	 */
@@ -65,7 +65,11 @@ public class SysRoleController extends BaseController {
 	public String roleAdd() {
 		return "role_add";
 	}
-
+	/**
+	 * 获取分页角色列表
+	 * @param dto
+	 * @return
+	 */
 	@RequestMapping("getPageRoleList")
 	@ResponseBody
 	public Map<String, Object> getPageRoleList(RoleDTO dto) {
@@ -76,7 +80,7 @@ public class SysRoleController extends BaseController {
 	}
 
 	/**
-	 * 跳转角色列表
+	 * 获取角色信息
 	 * 
 	 * @return
 	 */
@@ -116,7 +120,7 @@ public class SysRoleController extends BaseController {
 	}
 
 	/**
-	 * 更新
+	 * 删除
 	 * 
 	 * @return
 	 */

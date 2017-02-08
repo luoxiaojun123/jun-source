@@ -110,7 +110,7 @@ public class SysMenuController extends BaseController {
 	}
 
 	/**
-	 * 获取菜单列表
+	 * 删除
 	 * 
 	 * @param dto
 	 * @return
@@ -124,7 +124,7 @@ public class SysMenuController extends BaseController {
 	}
 
 	/**
-	 * 获取菜单列表
+	 * 保存
 	 * 
 	 * @param dto
 	 * @return
@@ -138,7 +138,7 @@ public class SysMenuController extends BaseController {
 	}
 
 	/**
-	 * 获取菜单列表
+	 * 修改
 	 * 
 	 * @param dto
 	 * @return
@@ -150,7 +150,10 @@ public class SysMenuController extends BaseController {
 		sysMenuService.update(menu);
 		return GSONUtils.toJson(result, true);
 	}
-
+	/**
+	 * 权限查询
+	 * @return
+	 */
 	@RequestMapping("perms")
 	@ResponseBody
 	public Map<String, Object> perms() {
