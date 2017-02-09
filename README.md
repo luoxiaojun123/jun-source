@@ -31,3 +31,4 @@ jun-source 是一个以权限管理开始的项目，重在将我平时学的，
 - 在 shiro 中使用dubbo的服务，由于dubbo使用注解，而我将shiro配置在，所以在shiro中不能通过@Reference 发现服务，所以 对于shiro引用服务 通过xml的方式配置，原因是spring加载配置文件时就将Realm实例化
 - 本项目中数据源是通过jndi配置的 配置在tomcat context.xml 中 ，采用org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource 实现多数据源的切换 通过 @SlaveDataSource 直接在方法上实现数据的切换
 - Mybatis 一次执行多条sql语句 修改数据库连接参数加上allowMultiQueries=true
+- 使用 PageHelper 插件分页
