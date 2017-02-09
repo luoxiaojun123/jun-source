@@ -7,7 +7,6 @@ jun-source 是一个以权限管理开始的项目，重在将我平时学的，
 
 本项目中技术点，问题，以及解决方案（后续增加）
 - 由于选用的RPC框架是dubbo，dubbo现在也不更新，使用的spring版本低，所以会跟项目中依赖的高版本spring冲突 解决方法
-  <!--dubbo依赖 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
