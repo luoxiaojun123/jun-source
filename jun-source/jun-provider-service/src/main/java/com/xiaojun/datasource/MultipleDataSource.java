@@ -2,18 +2,18 @@ package com.xiaojun.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 /**
- * ¶àÊı¾İÔ´Â·ÓÉ
+ * å¤šæ•°æ®æºè·¯ç”±
  * @author xiaojun
  * @email  lxjluoxiaojun@163.com
- * @date   2017Äê1ÔÂ11ÈÕ
+ * @date   2017å¹´1æœˆ11æ—¥
  */
 public class MultipleDataSource extends AbstractRoutingDataSource {
 	/**
-	 * ÎªÃ¿¸öÏß³Ì¿ª±ÙÒ»¸ö¿Õ¼ä
+	 * ä¸ºæ¯ä¸ªåˆ†é…ä¸€ä¸ªçº¿ç¨‹ç©ºé—´
 	 */
 	private static final ThreadLocal<String> dataSourceKey =new ThreadLocal<>(); 
 	/**
-	 * ÉèÖÃÊı¾İÔ´
+	 * è®¾ç½®æ•°æ®æº
 	 * @param dataSource
 	 */
 	public static void setDataSourceKey(String dataSource){
