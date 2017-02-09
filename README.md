@@ -7,7 +7,7 @@ jun-source 是一个以权限管理开始的项目，重在将我平时学的，
 
 本项目中技术点，问题，以及解决方案（后续增加）
 - 由于选用的RPC框架是dubbo，dubbo现在也不更新，使用的spring版本低，所以会跟项目中依赖的高版本spring冲突 解决方法
-		<dependency>
+		!<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
 			<version>${dubbo-version}</version>
@@ -17,7 +17,7 @@ jun-source 是一个以权限管理开始的项目，重在将我平时学的，
 					<groupId>org.springframework</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		!</dependency>
 - 选用dubbo时为了避免xml 过于复杂 ，采用注解的方式实现服务的注册，但是 当使用注解事务时，不生效。原因是 dubbo的 @Service 注解式不能被继承的，所以修改
   注解@Service 让其可以继承
     @Inherited    加上这个
