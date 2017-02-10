@@ -54,7 +54,7 @@ public class RedisClientTemplate {
 	 * @param key
 	 * @return
 	 */
-	public String get(String key) {
+	public String get(String key) throws Exception {
 		logger.info("需要获取的值" + key);
 		String result = null;
 		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
@@ -63,8 +63,6 @@ public class RedisClientTemplate {
 		}
 		try {
 			result = shardedJedis.get(key);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
 		} finally {
 			jedisDataSource.returnResource(shardedJedis);
 		}
