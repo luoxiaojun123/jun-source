@@ -10,5 +10,5 @@
 	http://www.springframework.org/schema/aop 
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
-	<context:component-scan base-package="com.xiaojun.service" />
+	<context:component-scan base-package="com.xiaojun.cache" />
 </beans>

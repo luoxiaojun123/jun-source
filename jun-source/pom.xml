@@ -23,6 +23,7 @@
 		<pagehelper-version>4.1.6</pagehelper-version>
 		<dozer-version>5.4.0</dozer-version>
 		<dubbo-version>2.5.3</dubbo-version>
+		<jeids-version>2.7.3</jeids-version>
 	</properties>
 	<profiles>
 		<profile>
