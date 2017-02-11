@@ -49,7 +49,7 @@ public class CacheRedisAspect {
 			try {
 				return getResultByDB(point, args, key);
 			} catch (Throwable e) {
-				e.printStackTrace();
+				logger.error("ณ๖ดํมห" + e.getMessage(), e);
 			}
 		}
 		return value;
