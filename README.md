@@ -20,3 +20,4 @@ jun-source 是一个以后台权限管理开始的项目，重在将我平时学
 - 本项目中数据源是通过jndi配置的 配置在tomcat context.xml 中 ，采用org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource 实现多数据源的切换 通过 @SlaveDataSource 直接在方法上实现数据的切换
 - Mybatis 一次执行多条sql语句 修改数据库连接参数加上allowMultiQueries=true
 - 使用 PageHelper 插件分页
+- jun-api  lib 下修改源码后的dubbo包和最新版支付宝sdk
