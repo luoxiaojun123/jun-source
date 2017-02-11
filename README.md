@@ -1,5 +1,5 @@
 # jun-source
-jun-source 是一个以权限管理开始的项目，重在将我平时学的，和一些经典的东西通过代码的方式实现
+jun-source 是一个以后台权限管理开始的项目，重在将我平时学的，和一些经典的东西通过代码的方式实现
 
 本项目所使用的技术（后续更新）：
 - 后端：spring,shiro,dubbo,mybatis，zookeeper，redis
