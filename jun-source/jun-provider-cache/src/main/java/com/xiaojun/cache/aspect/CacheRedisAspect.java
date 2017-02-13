@@ -1,7 +1,9 @@
 package com.xiaojun.cache.aspect;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,11 @@ import com.xiaojun.cache.jedis.RedisClientTemplate;
 import com.xiaojun.util.GSONUtils;
 
 /**
- * redis »º´æÇĞÃæ
+ * redis åˆ‡é¢
  * 
  * @author xiaojun
  * @email lxjluoxiaojun@163.com
- * @date 2017Äê2ÔÂ10ÈÕ
+ * @date 2017å¹´2æœˆ13æ—¥
  */
 @Component
 @Aspect
@@ -24,32 +26,33 @@ public class CacheRedisAspect {
 	@Autowired
 	private RedisClientTemplate redisClientTemplate;
 
-	@Pointcut("execution(* com.xiaojun.cache.*.*(..))")
+	@Pointcut("execution(* com.xiaojun.cache.impl.CacheServiceImpl.*(..))")
 	public void cacheRedisPointcut() {
 	};
 
+	@Around("cacheRedisPointcut()")
 	public Object getCache(ProceedingJoinPoint point) {
 		Object[] args = point.getArgs();
-		String key = null;
+		String key = "";
 		if (args != null && args.length != 0) {
 			key = (String) args[0];
 		}
-		String value = null;
+		String value = "";
 		try {
 			value = redisClientTemplate.get(key);
 		} catch (Exception e) {
-			logger.warn("redis»ñÈ¡»º´æÊ§°Ü" + e.getMessage(), e);
+			logger.warn("redisè·å–å¤±è´¥" + e.getMessage(), e);
 			try {
 				value = getResultByDB(point, args, key);
 			} catch (Throwable e1) {
-				logger.error("³ö´íÁË" + e.getMessage(), e);
+				logger.error("å‡ºé”™äº†" + e.getMessage(), e);
 			}
 		}
-		if ("".equals(value)) {
+		if (StringUtils.isEmpty(value)) {
 			try {
 				return getResultByDB(point, args, key);
 			} catch (Throwable e) {
-				logger.error("³ö´íÁË" + e.getMessage(), e);
+				logger.error("å‡ºé”™äº†" + e.getMessage(), e);
 			}
 		}
 		return value;
@@ -58,11 +61,11 @@ public class CacheRedisAspect {
 
 	private String getResultByDB(ProceedingJoinPoint point, Object[] args, String key) throws Throwable {
 		String value;
-		// Ö´ĞĞÄ¿±ê·½·¨£¬´ÓÊı¾İ¿âÖĞ»ñÈ¡
+		// æ‰§è¡Œç›®æ ‡æ–¹æ³•
 		Object proceed = point.proceed(args);
-		// ½«½á¹û×ª»¯Îªjson¸ñÊ½
+		// å°†ç›®æ ‡æ–¹å¼è½¬åŒ–ä¸ºjson
 		value = GSONUtils.toJson(proceed, false);
-		// ´æÈë»º´æ
+		// ä¿å­˜è¿›redisä¸­
 		redisClientTemplate.set(key, value);
 		return value;
 	}

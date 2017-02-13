@@ -19,6 +19,7 @@ import com.xiaojun.dto.UserDTO;
 import com.xiaojun.entity.SysUserEntity;
 import com.xiaojun.exception.CustomException;
 import com.xiaojun.service.SysUserService;
+import com.xiaojun.service.cache.CacheService;
 import com.xiaojun.shiro.ShiroUtils;
 import com.xiaojun.util.GSONUtils;
 import com.xiaojun.util.PasswordHelper;
@@ -39,6 +40,8 @@ public class SysUserController extends BaseController {
 	 */
 	@Reference
 	private SysUserService sysUserService;
+	@Reference
+	private CacheService cacheService;
 
 	/**
 	 * 获取用户基本信息
@@ -50,6 +53,8 @@ public class SysUserController extends BaseController {
 	public String getUserInfo() throws CustomException {
 		Result<SysUserEntity> result = new Result<>();
 		SysUserEntity user = ShiroUtils.getSysUserEntity();
+		// 测试spring 集成redis
+		// String userInfo = cacheService.getUserInfo("12");
 		result.setResult(user);
 		String resultJson = GSONUtils.toJson(result, true);
 		logger.info("返回用户json" + resultJson);

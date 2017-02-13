@@ -4,42 +4,42 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 /**
- * Jedis ÊµÏÖ
+ * Jedisæ•°æ®æºå®ç°
  * 
  * @author xiaojun
  * @email lxjluoxiaojun@163.com
- * @date 2017Äê2ÔÂ9ÈÕ
+ * @date 2017å¹´2æœˆ13æ—¥
  */
-@Repository("JedisDataSource")
+@Repository("jedisDataSource")
 public class JedisDataSourceImpl implements JedisDataSource {
 
 	private Logger logger = Logger.getLogger(getClass());
 
 	@Autowired
-	private ShardedJedisPool shardedJedisPool;
+	private JedisPool jedisPool;
 
 	@Override
-	public ShardedJedis getRedisClient() {
-		ShardedJedis shardedJedis = null;
+	public Jedis getRedisClient() {
+		Jedis jedis = null;
 		try {
-			shardedJedis = shardedJedisPool.getResource();
-			return shardedJedis;
+			jedis = jedisPool.getResource();
+			return jedis;
 		} catch (Exception e) {
-			logger.error("»ñÈ¡jedisÊı¾İÔ´Ê§°Ü",e);
-			if (shardedJedis != null) {
-				shardedJedis.close();
+			logger.error("å‡ºé”™äº†", e);
+			if (jedis != null) {
+				jedis.close();
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public void returnResource(ShardedJedis shardedJedis) {
-		shardedJedis.close();
+	public void returnResource(Jedis jedis) {
+		jedis.close();
 	}
 
 }

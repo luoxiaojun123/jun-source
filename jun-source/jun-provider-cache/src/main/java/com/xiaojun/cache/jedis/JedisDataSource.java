@@ -1,23 +1,23 @@
 package com.xiaojun.cache.jedis;
 
-import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.Jedis;
 
 /**
- * jedisÊı¾İÔ´
+ * Jedisæ•°æ®æº
  * @author xiaojun
  * @email  lxjluoxiaojun@163.com
- * @date   2017Äê2ÔÂ9ÈÕ
+ * @date   2017å¹´2æœˆ13æ—¥
  */
 public interface JedisDataSource {
 	/**
-	 * »ñÈ¡¿Í»§¶ËÁ¬½Ó
+	 * è·å–rediså®¢æˆ·ç«¯
 	 * @return
 	 */
-	ShardedJedis getRedisClient();
+	Jedis getRedisClient();
 	/**
-	 * »ØÊÕ×ÊÔ´
+	 * å…³é—­jedisèµ„æº
 	 * @param shardedJedis
 	 */
-	void returnResource(ShardedJedis shardedJedis);
+	void returnResource(Jedis jedis);
 	
 }

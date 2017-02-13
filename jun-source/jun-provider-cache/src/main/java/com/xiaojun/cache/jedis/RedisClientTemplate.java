@@ -4,14 +4,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.Jedis;
 
 /**
- * redis²Ù×÷¿Í»§¶Ë
+ * redisæ“ä½œå®¢æˆ·ç«¯
  * 
  * @author xiaojun
  * @email lxjluoxiaojun@163.com
- * @date 2017Äê2ÔÂ9ÈÕ
+ * @date 2017å¹´2æœˆ13æ—¥
  */
 @Repository("redisClientTemplate")
 public class RedisClientTemplate {
@@ -20,76 +20,77 @@ public class RedisClientTemplate {
 	private JedisDataSource jedisDataSource;
 
 	public void disconnect() {
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		shardedJedis.disconnect();
+		Jedis jedis = jedisDataSource.getRedisClient();
+		jedis.disconnect();
 	}
 
 	/**
-	 * ÉèÖÃµ¥¸öÖµ
+	 * ä¿å­˜redisä¸­
 	 * 
 	 * @param key
 	 * @param value
 	 * @return
 	 */
 	public String set(String key, String value) {
-		logger.info("ÉèÖÃµÄkeyºÍvalue" + key + ":" + value);
+		logger.info("ä¿å­˜åœ¨redisä¸­çš„keyå’Œvalue" + key + ":" + value);
 		String result = null;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
+		Jedis jedis = jedisDataSource.getRedisClient();
+		if (jedis == null) {
 			return result;
 		}
 		try {
-			result = shardedJedis.set(key, value);
+			result = jedis.set(key, value);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		} finally {
-			jedisDataSource.returnResource(shardedJedis);
+			jedisDataSource.returnResource(jedis);
 		}
 		return result;
 	}
 
 	/**
-	 * »ñÈ¡µ¥¸öÖµ
+	 * æ ¹æ®keyä»ç¼“å­˜ä¸­è·å–Öµ
 	 * 
 	 * @param key
 	 * @return
 	 */
 	public String get(String key) throws Exception {
-		logger.info("ĞèÒª»ñÈ¡µÄÖµ" + key);
+		logger.info("è·å–ç¼“å­˜çš„key:" + key);
 		String result = null;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
+		Jedis jedis = jedisDataSource.getRedisClient();
+		if (jedis == null) {
 			return result;
 		}
 		try {
-			result = shardedJedis.get(key);
+			result = jedis.get(key);
 		} finally {
-			jedisDataSource.returnResource(shardedJedis);
+			jedisDataSource.returnResource(jedis);
 		}
 		return result;
 	}
 
 	/**
-	 * ÅĞ¶ÏkeyÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­keyæ˜¯å¦å­˜åœ¨ç¼“å­˜ä¸­
 	 */
 	public Boolean exists(String key) {
 		Boolean result = false;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
+		Jedis jedis = jedisDataSource.getRedisClient();
+		if (jedis == null) {
 			return result;
 		}
 		try {
-			result = shardedJedis.exists(key);
+			result = jedis.exists(key);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		} finally {
-			jedisDataSource.returnResource(shardedJedis);
+			jedisDataSource.returnResource(jedis);
 		}
 		return result;
 	}
 
 	/**
-	 * ÉèÖÃkeyÔÚÄ³¶ÎÊ±¼äºóÊ§Ğ§
+	 * 
+	 * è®¾ç½®keyåœ¨ç¼“å­˜ä¸­çš„æœ‰æ•ˆæœŸ
 	 * 
 	 * @param key
 	 * @param seconds
@@ -97,61 +98,16 @@ public class RedisClientTemplate {
 	 */
 	public Long expire(String key, int seconds) {
 		Long result = null;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
+		Jedis jedis = jedisDataSource.getRedisClient();
+		if (jedis == null) {
 			return result;
 		}
 		try {
-			result = shardedJedis.expire(key, seconds);
+			result = jedis.expire(key, seconds);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		} finally {
-			jedisDataSource.returnResource(shardedJedis);
-		}
-		return result;
-	}
-
-	/**
-	 * ÉèÖÃÄ³¸ökeyÔÚÄ³¸öÊ±¼äµãÊ§Ğ§
-	 * 
-	 * @param key
-	 * @param unixTime
-	 * @return
-	 */
-	public Long expireAt(String key, long unixTime) {
-		Long result = null;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
-			return result;
-		}
-		try {
-			result = shardedJedis.expireAt(key, unixTime);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		} finally {
-			jedisDataSource.returnResource(shardedJedis);
-		}
-		return result;
-	}
-
-	/**
-	 * »ñÈ¡Ä³¸ökeyµ½ÆÚµÄÊ£ÓàÊ±¼ä(Ãë)
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public Long ttl(String key) {
-		Long result = null;
-		ShardedJedis shardedJedis = jedisDataSource.getRedisClient();
-		if (shardedJedis == null) {
-			return result;
-		}
-		try {
-			result = shardedJedis.ttl(key);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		} finally {
-			jedisDataSource.returnResource(shardedJedis);
+			jedisDataSource.returnResource(jedis);
 		}
 		return result;
 	}

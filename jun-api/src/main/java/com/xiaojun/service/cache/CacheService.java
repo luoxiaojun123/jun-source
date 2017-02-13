@@ -6,5 +6,10 @@ package com.xiaojun.service.cache;
  * @date   2017年2月10日
  */
 public interface CacheService {
-
+	/**
+	 * 获取用户信息
+	 * @param key
+	 * @return
+	 */
+	String getUserInfo(String key);
 }

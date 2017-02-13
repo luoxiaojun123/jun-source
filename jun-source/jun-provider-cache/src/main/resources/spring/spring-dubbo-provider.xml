@@ -10,7 +10,7 @@
  	<dubbo:application name="${dubbo.provider.application.name}" owner="${dubbo.provider.application.owner}" />
  	<dubbo:registry address="${dubbo.registry.address}" />
 	<dubbo:protocol name="${dubbo.provider.protocol.name}" threads="${dubbo.provider.protocol.threads}" 
-					threadpool="${dubbo.provider.protocol.threadpool}" port="${dubbo.provider.protocol.port}" />
+					threadpool="${dubbo.provider.protocol.threadpool}" port="${dubbo.provider.cache.protocol.port}" />
 	<dubbo:provider group="${dubbo.provider.group}" version="${dubbo.provider.version}" timeout="${dubbo.provider.timeout}" />
 	<dubbo:annotation package="com.xiaojun" />
 </beans> 

@@ -6,6 +6,8 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<properties>
+		<!--添加编译编码为UTF-8  -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.8.RELEASE</spring.version>
 		<servlet-version>3.1.0</servlet-version>
 		<junit.version>4.11</junit.version>
@@ -43,6 +45,7 @@
 				<dubbo.provider.protocol.threads>50</dubbo.provider.protocol.threads>
 				<dubbo.provider.protocol.name>dubbo</dubbo.provider.protocol.name>
 				<dubbo.provider.protocol.port>20880</dubbo.provider.protocol.port>
+				<dubbo.provider.cache.protocol.port>20881</dubbo.provider.cache.protocol.port>
 				<dubbo.provider.protocol.threadpool>cached</dubbo.provider.protocol.threadpool>
 				<!-- dubbo服务消费者相关配置 -->
 				<dubbo.consumer.application.name>jun-consumer-gateway</dubbo.consumer.application.name>
