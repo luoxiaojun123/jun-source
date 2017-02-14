@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+    http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	<description>rabbitMq 连接服务器配置</description>
+	<context:property-placeholder location="classpath:spring/rabbitmq.properties" />
+	<!-- 连接配置 -->
+	<rabbit:connection-factory id="connectionFactory"
+		host="${mq.host}" username="${mq.username}" password="${mq.password}"
+		port="${mq.port}" virtual-host="${mq.vhost}" />
+	<rabbit:admin connection-factory="connectionFactory" />
+	<!-- spring template声明 -->
+	<rabbit:template id="amqpTemplate" exchange="amqpExchange"
+		connection-factory="connectionFactory" message-converter="jsonMessageConverter" />
+	<!-- 消息对象json转换类 -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"></bean>
+	<!-- 声明一个消息队列Queue -->
+	<rabbit:queue id="test_queue_key" name="test_queue_key"
+		durable="true" auto-delete="false" exclusive="false" />
+	<!-- 交换机定义 -->
+	<rabbit:direct-exchange id="test-mq-exchange" name="test-mq-exchange" durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="test_queue_key" key="test_queue_key"></rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	
+	<!-- 监听配置 -->
+	<rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+		<rabbit:listener ref="queueListenter" queues="test_queue_key"/>
+	</rabbit:listener-container>
+	
+</beans>

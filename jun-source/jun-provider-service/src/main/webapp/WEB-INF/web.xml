@@ -6,7 +6,7 @@
 	<display-name>jun-provider-service</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/*.xml</param-value>
+		<param-value>classpath:spring/spring-*.xml</param-value>
 	</context-param>
 	<!-- 这个listener来确保Web应用程序的类加载器以及其加载的类正确的释放资源 -->
 	<listener>

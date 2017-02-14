@@ -26,6 +26,8 @@
 		<dozer-version>5.4.0</dozer-version>
 		<dubbo-version>2.5.3</dubbo-version>
 		<jeids-version>2.7.3</jeids-version>
+		<amqp-client-version>3.6.5</amqp-client-version>
+		<spring-rabbit-version>1.6.7.RELEASE</spring-rabbit-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -166,6 +168,17 @@
 			<artifactId>dozer</artifactId>
 			<version>${dozer-version}</version>
 		</dependency>
+		<!-- rabbitMQ依赖包 -->
+		<dependency>
+     	 	<groupId>com.rabbitmq</groupId>
+      		<artifactId>amqp-client</artifactId>
+     	 	<version>${amqp-client-version}</version>
+    	</dependency>
+    	<dependency>
+       		<groupId>org.springframework.amqp</groupId>
+        	<artifactId>spring-rabbit</artifactId>
+        	<version>${spring-rabbit-version}</version>
+    	</dependency>
 	</dependencies>
 	<build>
 		<resources>
