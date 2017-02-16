@@ -49,8 +49,12 @@
 				<dubbo.provider.protocol.port>20880</dubbo.provider.protocol.port>
 				<dubbo.provider.cache.protocol.port>20881</dubbo.provider.cache.protocol.port>
 				<dubbo.provider.protocol.threadpool>cached</dubbo.provider.protocol.threadpool>
-				<!-- dubbo服务消费者相关配置 -->
+				
+				<!-- 消费者配置 -->
+				<!-- dubbo gateway服务消费者相关配置 -->
 				<dubbo.consumer.application.name>jun-consumer-gateway</dubbo.consumer.application.name>
+				<!-- dubbo web服务消费者相关配置 -->
+				<dubbo.consumer.application.web.name>jun-consumer-web</dubbo.consumer.application.web.name>
 				<dubbo.consumer.application.owner>jun-consumer</dubbo.consumer.application.owner>
 				<dubbo.consumer.group>jun</dubbo.consumer.group>
 				<dubbo.consumer.retries>2</dubbo.consumer.retries>

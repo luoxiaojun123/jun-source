@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<mvc:annotation-driven />
+	<dubbo:annotation package="com.xiaojun" />
+	<context:component-scan base-package="com.xiaojun.controller" />
+	<context:property-placeholder location="classpath:config/pay.properties" />
+	<bean id="alipayClient" class="com.alipay.api.DefaultAlipayClient">
+		<constructor-arg name="serverUrl" value="${ali.pay.gatewayurl}"></constructor-arg>
+		<constructor-arg name="appId" value="${ali.pay.app_id}"></constructor-arg>
+		<constructor-arg name="privateKey" value="${ali.pay.private_key}"></constructor-arg>
+		<constructor-arg name="format" value="${ali.pay.format}"></constructor-arg>
+		<constructor-arg name="charset" value="${ali.pay.input_charset}"></constructor-arg>
+		<constructor-arg name="alipayPulicKey" value="${ali.pay.alipay_public_key}"></constructor-arg>
+	</bean>
+</beans>
