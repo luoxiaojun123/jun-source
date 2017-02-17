@@ -25,3 +25,4 @@ jun-source 是一个以后台权限管理开始的项目，重在将我平时学
 - 使用 PageHelper 插件分页
 - jun-api  lib 下修改源码后的dubbo包和最新版支付宝sdk
 - spring 集成redis  业务中通过AOP方式实现
+- jun-consumer-web 集成支付宝支付(使用的是沙箱环境，可以自己在开放平台配置)，包括相关其他的支付宝接口  支付访问测试localhost:8080/v1/pay/initPayParams（测试数据写在代码中，需修改订单号） 同步和异步通知地址可以使用ngrok生成免费域名进行测试
