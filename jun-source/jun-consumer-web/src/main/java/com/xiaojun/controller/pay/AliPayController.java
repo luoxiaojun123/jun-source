@@ -69,7 +69,8 @@ public class AliPayController extends BaseController{
 			response.getWriter().write(form);
 			response.getWriter().flush();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("支付初始化出错了",e);
+			logger.info("支付参数"+biz_params);
 		}
 	}
 	/**
