@@ -28,6 +28,8 @@
 		<jeids-version>2.7.3</jeids-version>
 		<amqp-client-version>3.6.5</amqp-client-version>
 		<spring-rabbit-version>1.6.7.RELEASE</spring-rabbit-version>
+		<quartz-version>2.2.1</quartz-version>
+		<quartz-jobs-version>2.2.1</quartz-jobs-version>
 	</properties>
 	<profiles>
 		<profile>

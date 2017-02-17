@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd        
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+     	http://www.springframework.org/schema/aop 
+     	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	<!-- 增加定时器配置 -->  
+    <!-- 线程执行器配置，用于任务注册 -->  
+	<bean id="executor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="500" />
+	</bean>
+	<!-- 设置调度 -->
+	<!-- 由spring生成scheduler -->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="configLocation" value="classpath:config/quartz.properties"></property>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="transactionManager" ref="transactionManager"></property>
+		<property name="schedulerName" value="quartzScheduler"></property>
+		 <!--可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了 -->
+		<property name="overwriteExistingJobs" value="true"></property>
+		 <!--必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
+		<property name="startupDelay" value="60"></property>
+		<!-- 设置自动启动 -->
+        <property name="autoStartup" value="true" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext"></property>
+		<property name="jobFactory">
+			<bean class="com.xiaojun.quartz.AutowiringSpringBeanJobFactory" />
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="springQuertzClusterTaskSchedulerTesterTigger"/>
+			</list>
+		</property>
+		<property name="jobDetails">
+			<list>
+				<ref bean="springQuertzClusterTaskSchedulerTesterJobDetail"/>
+			</list>
+		</property>
+		<property name="taskExecutor" ref="executor"></property>
+	</bean>
+	 <!-- 触发器 -->  
+	<bean id="springQuertzClusterTaskSchedulerTesterTigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="springQuertzClusterTaskSchedulerTesterJobDetail"></property>
+		<property name="cronExpression" value="*/30 * * * * ?"></property>
+	</bean>
+	<!-- 任务细节 -->
+	<bean id="springQuertzClusterTaskSchedulerTesterJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.xiaojun.quartz.TestTask"></property>	
+		<property name="requestsRecovery" value="false"></property>
+		<property name="durability" value="true"></property>
+	</bean>
+</beans>
