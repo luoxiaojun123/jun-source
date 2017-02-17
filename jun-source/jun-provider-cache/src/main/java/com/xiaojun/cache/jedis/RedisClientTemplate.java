@@ -1,6 +1,7 @@
 package com.xiaojun.cache.jedis;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ import redis.clients.jedis.Jedis;
  */
 @Repository("redisClientTemplate")
 public class RedisClientTemplate {
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private JedisDataSource jedisDataSource;
 

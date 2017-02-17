@@ -3,7 +3,8 @@ package com.xiaojun.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +20,7 @@ import com.xiaojun.util.Result;
  */
 public class CustomExceptionResolver implements HandlerExceptionResolver {
 	
-	private static Logger logger=Logger.getLogger(CustomExceptionResolver.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
  
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,

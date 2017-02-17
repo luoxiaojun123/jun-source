@@ -1,6 +1,7 @@
 package com.xiaojun.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +20,7 @@ public class MessageProducerServiceImpl implements MessageProducerService {
 	@Autowired
 	private AmqpTemplate amqpTemplate;
 
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public void sendMessage(Object message) {

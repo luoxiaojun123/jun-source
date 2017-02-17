@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 基础controller
@@ -17,9 +18,10 @@ import org.apache.log4j.Logger;
  */
 public abstract class BaseController {
 
-	protected Logger logger = Logger.getLogger(getClass());
-	
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+
 	protected Map<String, String> getNotifyParamsMap(HttpServletRequest request) {
+		@SuppressWarnings("rawtypes")
 		Enumeration parameterNames = request.getParameterNames();
 		Map<String, String> paramsMap = new HashMap<String, String>();
 		while (parameterNames.hasMoreElements()) {

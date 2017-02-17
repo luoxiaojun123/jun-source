@@ -1,11 +1,12 @@
 package com.xiaojun.cache.aspect;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ import com.xiaojun.util.GSONUtils;
 @Component
 @Aspect
 public class CacheRedisAspect {
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger=LoggerFactory.getLogger(getClass());
 	@Autowired
 	private RedisClientTemplate redisClientTemplate;
 

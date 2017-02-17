@@ -82,7 +82,7 @@ public class AliPayController extends BaseController{
 	 */
 	@RequestMapping("/returnUrl")
 	public String returnUrl(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> paramsMap = getNotifyParamsMap(request);
+	//	Map<String, String> paramsMap = getNotifyParamsMap(request);
 		return "success";
 	}
 	/**
@@ -161,6 +161,7 @@ public class AliPayController extends BaseController{
 			String refund_fee=response.getRefundFee();
 			System.out.println(refund_fee);
 			System.out.println(response.isSuccess());
+			System.out.println(msg);
 		} catch (AlipayApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.xiaojun.controller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 基础controller
@@ -11,6 +12,6 @@ import org.apache.log4j.Logger;
  */
 public abstract class BaseController {
 
-	protected Logger logger = Logger.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 }
