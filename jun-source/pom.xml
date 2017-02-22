@@ -31,6 +31,7 @@
 		<quartz-version>2.2.1</quartz-version>
 		<quartz-jobs-version>2.2.1</quartz-jobs-version>
 		<swagger2-version>2.4.0</swagger2-version>
+		<jackson-version>2.6.5</jackson-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -219,18 +220,24 @@
         <dependency>  
             <groupId>com.fasterxml.jackson.core</groupId>  
             <artifactId>jackson-core</artifactId>  
-            <version>2.6.5</version>  
+            <version>${jackson-version}</version>  
         </dependency>  
         <dependency>  
             <groupId>com.fasterxml.jackson.core</groupId>  
             <artifactId>jackson-databind</artifactId>  
-            <version>2.6.5</version>  
+            <version>${jackson-version}</version>  
         </dependency>  
         <dependency>  
             <groupId>com.fasterxml.jackson.core</groupId>  
             <artifactId>jackson-annotations</artifactId>  
-            <version>2.6.5</version>  
-        </dependency> 
+            <version>${jackson-version}</version>  
+        </dependency>
+        <!-- 阿里druid数据源 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid-version}</version>
+		</dependency> 
 	</dependencies>
 	<build>
 		<resources>

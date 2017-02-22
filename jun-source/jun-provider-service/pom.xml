@@ -14,12 +14,6 @@
 			<artifactId>jun-api</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 阿里druid数据源 -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid-version}</version>
-		</dependency>
 		<!-- spring集成mybatis相关包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
