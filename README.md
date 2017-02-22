@@ -10,7 +10,7 @@ jun-source 是一个以后台权限管理开始的项目，重在将我平时学
 - jun-provider-service 提供者，主要业务相关
 
 本项目所使用的技术（后续更新）：
-- 后端：spring,shiro,dubbo,mybatis,zookeeper,redis,RabbitMQ
+- 后端：spring,shiro,dubbo,mybatis,zookeeper,redis,rabbitmq,quartz集群,swagger2,druid
 - 前端：vue.js,ztree,jqgrid
 
 本项目中技术点，问题，以及解决方案（后续更新）
