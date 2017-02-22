@@ -11,6 +11,7 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc 
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 	<dubbo:annotation package="com.xiaojun" />
 	<context:component-scan base-package="com.xiaojun.controller" />
@@ -23,4 +24,6 @@
 		<constructor-arg name="charset" value="${ali.pay.input_charset}"></constructor-arg>
 		<constructor-arg name="alipayPulicKey" value="${ali.pay.alipay_public_key}"></constructor-arg>
 	</bean>
+	<bean id="swagger2Config"
+		class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"></bean>
 </beans>

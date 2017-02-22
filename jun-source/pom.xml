@@ -30,6 +30,7 @@
 		<spring-rabbit-version>1.6.7.RELEASE</spring-rabbit-version>
 		<quartz-version>2.2.1</quartz-version>
 		<quartz-jobs-version>2.2.1</quartz-jobs-version>
+		<swagger2-version>2.4.0</swagger2-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -203,6 +204,33 @@
     		<version>2.4</version>
     		<classifier>jdk15</classifier> 
 		</dependency>
+		<!-- Swagger2依赖包 -->
+		<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2-version}</version>
+        </dependency>
+        <!-- json -->  
+        <dependency>  
+            <groupId>com.fasterxml.jackson.core</groupId>  
+            <artifactId>jackson-core</artifactId>  
+            <version>2.6.5</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>com.fasterxml.jackson.core</groupId>  
+            <artifactId>jackson-databind</artifactId>  
+            <version>2.6.5</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>com.fasterxml.jackson.core</groupId>  
+            <artifactId>jackson-annotations</artifactId>  
+            <version>2.6.5</version>  
+        </dependency> 
 	</dependencies>
 	<build>
 		<resources>
