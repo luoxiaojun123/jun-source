@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<properties>
-		<!--添加编译编码为UTF-8  -->
+		<!--添加编译编码为UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.8.RELEASE</spring.version>
 		<servlet-version>3.1.0</servlet-version>
@@ -32,6 +32,7 @@
 		<quartz-jobs-version>2.2.1</quartz-jobs-version>
 		<swagger2-version>2.4.0</swagger2-version>
 		<jackson-version>2.6.5</jackson-version>
+		<slf4j-version>1.7.21</slf4j-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -53,7 +54,7 @@
 				<dubbo.provider.protocol.port>20880</dubbo.provider.protocol.port>
 				<dubbo.provider.cache.protocol.port>20881</dubbo.provider.cache.protocol.port>
 				<dubbo.provider.protocol.threadpool>cached</dubbo.provider.protocol.threadpool>
-				
+
 				<!-- 消费者配置 -->
 				<!-- dubbo gateway服务消费者相关配置 -->
 				<dubbo.consumer.application.name>jun-consumer-gateway</dubbo.consumer.application.name>
@@ -178,66 +179,82 @@
 		</dependency>
 		<!-- rabbitMQ依赖包 -->
 		<dependency>
-     	 	<groupId>com.rabbitmq</groupId>
-      		<artifactId>amqp-client</artifactId>
-     	 	<version>${amqp-client-version}</version>
-    	</dependency>
-    	<dependency>
-       		<groupId>org.springframework.amqp</groupId>
-        	<artifactId>spring-rabbit</artifactId>
-        	<version>${spring-rabbit-version}</version>
-    	</dependency>
-    	<!-- slf4j依赖包 -->
-    	<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${amqp-client-version}</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.slf4j</groupId>
-  			<artifactId>slf4j-log4j12</artifactId>
-  		<version>1.7.21</version>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<version>${spring-rabbit-version}</version>
+		</dependency>
+		<!-- slf4j依赖包 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
 		</dependency>
 		<!-- jsonObject 依赖包 -->
 		<dependency>
-    		<groupId>net.sf.json-lib</groupId>
-   			<artifactId>json-lib</artifactId>
-    		<version>2.4</version>
-    		<classifier>jdk15</classifier> 
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 		<!-- Swagger2依赖包 -->
 		<dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger2-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger2-version}</version>
-        </dependency>
-        <!-- json -->  
-        <dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-core</artifactId>  
-            <version>${jackson-version}</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-databind</artifactId>  
-            <version>${jackson-version}</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-annotations</artifactId>  
-            <version>${jackson-version}</version>  
-        </dependency>
-        <!-- 阿里druid数据源 -->
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger2-version}</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		<!-- 阿里druid数据源 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>${druid-version}</version>
-		</dependency> 
+		</dependency>
+		<!-- MongoDB -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.9.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.0.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd        
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+     	http://www.springframework.org/schema/data/mongo 
+     	http://www.springframework.org/schema/data/mongo/spring-mongo.xsd  ">
+	<context:property-placeholder location="classpath:config/mongo.properties" />
+	<mongo:mongo-client id="mongo" replica-set="${mongo.replicaSet}">
+		<mongo:client-options connections-per-host="${mongo.connectionsPerHost}" />
+	</mongo:mongo-client>
+	<!-- <mongo:mongo id="mongo" replica-set="${mongo.replicaSet}">
+
+		<mongo:options connections-per-host="${mongo.connectionsPerHost}"
+			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${mongo.connectTimeout}" max-wait-time="${mongo.maxWaitTime}"
+			auto-connect-retry="${mongo.autoConnectRetry}" socket-keep-alive="${mongo.socketKeepAlive}"
+			socket-timeout="${mongo.socketTimeout}" slave-ok="${mongo.slaveOk}"
+			write-fsync="${mongo.writeFsync}" write-number="${mongo.writeNumber}"
+			write-timeout="${mongo.riteTimeout}" />
+	</mongo:mongo> -->
+	<!-- 设置使用的数据库 名 -->
+	<mongo:db-factory id="mongoDbFactory" dbname="test" mongo-ref="mongo" />
+	<!-- mongodb的模板 -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
+
+</beans>

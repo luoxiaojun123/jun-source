@@ -8,6 +8,15 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/spring-*.xml</param-value>
 	</context-param>
+	<!-- Spring的log4j监听器-->
+    <!-- 设置log4j配置文件路径 -->
+	<context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:config/log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 	<!-- 这个listener来确保Web应用程序的类加载器以及其加载的类正确的释放资源 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
