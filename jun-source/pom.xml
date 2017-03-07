@@ -273,5 +273,6 @@
 		<module>jun-consumer-gateway</module>
 		<!-- 服务消费方web层 -->
 		<module>jun-consumer-web</module>
+		<module>jun-consumer-gatewaycas</module>
 	</modules>
 </project>
