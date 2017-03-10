@@ -37,8 +37,10 @@ public class PasswordHelper {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(PasswordHelper.encryptPassword("admin"));
-		
+		DefaultPasswordEncoder defaultPasswordEncoder=new DefaultPasswordEncoder("MD5");
+		System.out.println(PasswordHelper.encryptPassword("admin@2015"));
+		String encryptedPassword = defaultPasswordEncoder.encode("admin@2015");
+		System.out.println(encryptedPassword+"-----");
 		Result<String> result=new Result<>();
 		
 		System.out.println(GSONUtils.toJson(result, true));
