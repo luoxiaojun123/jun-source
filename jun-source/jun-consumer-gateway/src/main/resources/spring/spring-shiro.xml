@@ -16,7 +16,6 @@
      	http://www.springframework.org/schema/mvc/spring-mvc.xsd
      	http://code.alibabatech.com/schema/dubbo 
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	<context:property-placeholder location="classpath:config/shiro.properties"/>
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml"></property>
 	</bean>
@@ -28,46 +27,23 @@
 		<constructor-arg name="cacheManager" ref="cacheManager" />
 		<constructor-arg name="sysUserService" ref="sysUserService" />
 		<constructor-arg name="sysMenuService" ref="sysMenuService" />
-		<!-- 认证通过后的默认角色 -->
-		<property name="defaultRoles" value="ROLE_USER"/>
-		<!-- cas服务端地址前缀 -->
-		<property name="casServerUrlPrefix" value="${shiro.cas.serverUrlPrefix}"/>
-		<!-- 应用服务地址，用来接收cas服务端票据 -->
-		<property name="casService" value="${shiro.cas.service}"></property>
 	</bean>
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm"></property>
-		<property name="subjectFactory" ref="casSubjectFactory"></property>
 	</bean>
-	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"></bean>
-	
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"></property>
-		<property name="loginUrl" value="${shiro.loginUrl}"></property>
+		<property name="loginUrl" value="/login"></property>
 		<property name="successUrl" value="/index"></property>
 		<property name="unauthorizedUrl" value="/"></property>
-		<property name="filters">
-			<map>
-				<!-- 添加casFilter到shiroFilter -->
-				<entry key="casFilter" value-ref="casFilter"></entry>
-				<entry key="logoutFilter" value-ref="logoutFilter"></entry>
-			</map>
-		</property>
 		<property name="filterChainDefinitions">
 			<value>
 				/statics/**=anon
 				/captcha.jpg=anon
-				/login=casFilter
-				/logout=logoutFilter
+				/login=anon
 				/druid=anon
 				/**=authc
 			</value>
 		</property>
-	</bean>
-	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-		<property name="failureUrl" value="${shiro.loginUrl}"></property>
-	</bean>
-	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-		<property name="redirectUrl" value="${shiro.logoutUrl}"></property>
 	</bean>
 </beans>

@@ -18,7 +18,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cas.CasRealm;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.xiaojun.entity.SysUserEntity;
@@ -32,7 +32,7 @@ import com.xiaojun.service.SysUserService;
  * @email lxjluoxiaojun@163.com
  * @date 2017年1月16日
  */
-public class UserRealm extends CasRealm {
+public class UserRealm extends AuthorizingRealm {
 
 	private SysUserService sysUserService;
 
