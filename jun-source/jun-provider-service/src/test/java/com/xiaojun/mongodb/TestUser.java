@@ -29,7 +29,7 @@ public class TestUser {
 	@Test
 	public void testAdd() {
 		// 添加一百个user
-		for (int i = 1; i < 6; i++) {
+		for (int i = 0; i < 6; i++) {
 			User user = new User();
 			user.setId("" + i);
 			user.setAge(i);
