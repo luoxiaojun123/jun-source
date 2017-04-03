@@ -18,7 +18,7 @@ public class TestUser {
 	public static void initSpring() {
 		try {
 			app = new ClassPathXmlApplicationContext(
-					new String[] { "classpath:spring/spring-mongo.xml", "classpath:spring/spring-context.xml" });
+					new String[] { "classpath:spring/spring-test-mongo.xml" });
 			userDaoImpl = (UserDao) app.getBean("userDao");
 			collectionName = "users";
 		} catch (Exception e) {
@@ -29,7 +29,7 @@ public class TestUser {
 	@Test
 	public void testAdd() {
 		// 添加一百个user
-		for (int i = 0; i < 100; i++) {
+		for (int i = 1; i < 6; i++) {
 			User user = new User();
 			user.setId("" + i);
 			user.setAge(i);
@@ -38,7 +38,7 @@ public class TestUser {
 			userDaoImpl.insert(user, collectionName);
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("maxAge", 50);
+		params.put("maxAge", 4);
 		List<User> list = userDaoImpl.findAll(params, collectionName);
 		System.out.println("user.count()==" + list.size());
 	}

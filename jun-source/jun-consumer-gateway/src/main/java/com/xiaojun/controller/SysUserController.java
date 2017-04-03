@@ -57,9 +57,9 @@ public class SysUserController extends BaseController {
 		Result<SysUserEntity> result = new Result<>();
 		SysUserEntity user = ShiroUtils.getSysUserEntity();
 		// 测试spring 集成redis
-		// String userInfo = cacheService.getUserInfo("12");
+		String userInfo = cacheService.getUserInfo("12");
 		// 测试spring 集成rabbitMQ
-		//MessageProducerService.sendMessage("测试rabbitMQ");
+		MessageProducerService.sendMessage("测试rabbitMQ");
 		result.setResult(user);
 		String resultJson = GSONUtils.toJson(result, true);
 		logger.info("返回用户json" + resultJson);
